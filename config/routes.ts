@@ -28,6 +28,12 @@ export default [
     icon: 'smile',
     component: './Welcome',
   },
+  {
+    path: '/Survey',
+    name: 'Survey',
+    // icon: 'smile',
+    component: './PrivacyRiskSurvey',
+  },
   // {
   //   path: '/admin',
   //   name: 'admin',
