@@ -98,6 +98,53 @@ const PrivacyRiskSurvey = () => {
             <Checkbox value="report">Contact the developer or relevant authorities</Checkbox>
           </Checkbox.Group>
         </Form.Item>
+        {/* 3. Risk Attitude Test */}
+        <h2>3. Risk Attitude Test</h2>
+
+        <h3>Scenario 1: Privacy Sharing in Social Apps</h3>
+        <Form.Item name="socialApp" label="A social app requests access to your contact list:">
+          <Radio.Group>
+            <Radio value="accept">A. Allow access, gain friend recommendations, with 10% privacy risk</Radio>
+            <Radio value="decline">B. Decline access, no recommendations, no privacy risk</Radio>
+          </Radio.Group>
+        </Form.Item>
+
+        <h3>Scenario 2: Transaction Record Analysis in Finance Apps</h3>
+        <Form.Item name="financeApp" label="A finance app requests access to your transaction records:">
+          <Radio.Group>
+            <Radio value="accept">A. Allow access, 90% chance of lower loan rates, 1% privacy risk</Radio>
+            <Radio value="decline">B. Decline access, no risk, no loan benefits</Radio>
+          </Radio.Group>
+        </Form.Item>
+
+        <h3>Scenario 3: Data Sharing in Shopping Apps</h3>
+        <Form.Item name="shoppingApp" label="A shopping app requests your shopping history:">
+          <Radio.Group>
+            <Radio value="accept">A. Allow sharing, 5% chance to win $500, 20% risk of ads</Radio>
+            <Radio value="decline">B. Decline sharing, no ads, no rewards</Radio>
+          </Radio.Group>
+        </Form.Item>
+
+        <h3>Scenario 4: Privacy Authorization in Health Apps</h3>
+        <Form.Item name="healthApp" label="A health app requests your health data:">
+          <Radio.Group>
+            <Radio value="accept">A. Share data, 80% chance of better health suggestions, 10% risk of misuse</Radio>
+            <Radio value="decline">B. Decline sharing, no suggestions, no risk</Radio>
+          </Radio.Group>
+        </Form.Item>
+
+        <h2>4. User Preferences and Attitudes</h2>
+        <Form.Item name="appPreference" label="Which type of app do you prefer?">
+          <Radio.Group>
+            <Radio value="free">Free apps with extensive permissions</Radio>
+            <Radio value="paid">Paid apps without personal data collection</Radio>
+          </Radio.Group>
+        </Form.Item>
+
+        <Form.Item name="privacyOpinion" label="What are your thoughts on privacy protection?">
+          <Input.TextArea placeholder="e.g., How do you balance privacy protection and convenience?" />
+        </Form.Item>
+
 
         {/* Submit Button */}
         <Form.Item>
