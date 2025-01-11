@@ -1,96 +1,98 @@
 // import { HeartTwoTone, SmileTwoTone } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-components';
 import { useIntl } from '@umijs/max';
-import { Divider, Flex, Tabs, Tag } from 'antd';
-import React from 'react';
+import { Flex, Tag, Typography } from 'antd';
+import React, { useState } from 'react';
 import App1 from './components/App1';
-import App2 from "@/pages/Category_Weather/components/App2";
-import App3 from "@/pages/Category_Weather/components/App3";
+import CategoryKeywords from '@/components/CategoryKeywords';
+const { Text } = Typography;
 
 const Weather: React.FC = () => {
   const intl = useIntl();
 
-  const onChange = (key: string) => {
-    console.log(key);
+  const [activeTabKey, setActiveTabKey] = useState('1'); // 当前激活的 Tab key
+
+  const weatherKeywords = [
+    'weather information',
+    'weather forecast',
+    'weather map',
+    'weather alerts',
+    'air quality',
+    'air pollution',
+    'environmental monitoring',
+    'temperature sensor',
+    'earthquake information',
+    'tide information',
+    'weather widget',
+  ];
+
+  const renderTabContent = () => {
+    switch (activeTabKey) {
+      case '1':
+        return <App1 />;
+      case '2':
+        return (
+          <div>
+            <h3>App 2 Content</h3>
+            <p>This is the content for App 2.</p>
+          </div>
+        );
+      case '3':
+        return (
+          <div>
+            <h3>App 3 Content</h3>
+            <p>This is the content for App 3.</p>
+          </div>
+        );
+      default:
+        return null;
+    }
   };
 
   return (
     <PageContainer
-      content={intl.formatMessage({
-        id: 'pages.categories.weather.title',
-        defaultMessage: 'Here are the apps of the Weather category, whose descriptive keywords include:',
-      })}
-    >
-      <Flex gap="4px 0" wrap>
-        <Tag bordered={false} color="magenta" style={{ fontSize: '14px' }}>
-          weather information
-        </Tag>
-        <Tag bordered={false} color="red" style={{ fontSize: '14px' }}>
-        weather forcast
-        </Tag>
-        <Tag bordered={false} color="volcano" style={{ fontSize: '14px' }}>
-          weather map
-        </Tag>
-        <Tag bordered={false} color="orange" style={{ fontSize: '14px' }}>
-          weather alerts
-        </Tag>
-        <Tag bordered={false} color="gold" style={{ fontSize: '14px' }}>
-          air quality
-        </Tag>
-        <Tag bordered={false} color="lime" style={{ fontSize: '14px' }}>
-          air pollution
-        </Tag>
-        <Tag bordered={false} color="green" style={{ fontSize: '14px' }}>
-        environmental monitoring
-        </Tag>
-        <Tag bordered={false} color="cyan" style={{ fontSize: '14px' }}>
-        temperature sensor
-        </Tag>
-        <Tag bordered={false} color="blue" style={{ fontSize: '14px' }}>
-        earthquake information
-        </Tag>
-        <Tag bordered={false} color="geekblue" style={{ fontSize: '14px' }}>
-        tide information
-        </Tag>
-        <Tag bordered={false} color="purple" style={{ fontSize: '14px' }}>
-        weather widget
-        </Tag>
-      </Flex>
-
-      <Divider style={{ borderColor: 'blue' }} orientation="center">
-        We have selected three representative apps. Please complete the privacy assessment for all of them.
-      </Divider>
-
-      <Tabs
-        onChange={onChange}
-        type="card"
-        centered
-        items={[
-          {
-            label: (
-              <>
-                <img
+      fixedHeader
+      // content={intl.formatMessage({
+      //   id: 'pages.categories.weather.title',
+      //   defaultMessage: 'In the Weather category, whose descriptive keywords include:',
+      // })}
+      header={{
+        title: 'Weather Category',
+      }}
+      content={
+        <CategoryKeywords keywords={weatherKeywords} />
+      }
+      tabList={[
+        {
+          tab: (
+            <>
+              <img
                 src={'/icons/Weather-Transparentclockandweather.webp'}
                 alt="Icon 1"
-                style={{ width: 20, borderRadius: '4px', marginLeft: 0, marginRight: 8 }} /> App 1
-              </>
-            ),
-            key: '1',
-            children: <App1 />,
-            icon: ''
-          },
-          {
-            label: 'App 2',
-            key: '2',
-            children: <App2/>,
-          },
-          {
-            label: 'App 3',
-            key: '3',
-            children: <App3 />,
-          },
-        ]}
-      />
+                style={{ width: 20, borderRadius: '4px', marginLeft: 0, marginRight: 8 }}
+              />{' '}
+              App 1
+            </>
+          ),
+          key: '1',
+        },
+        {
+          tab: 'App 2',
+          key: '2',
+        },
+        {
+          tab: 'App 3',
+          key: '3',
+        },
+      ]}
+      tabProps={{
+        type: 'card',
+        tabBarGutter: 4,
+        onChange: (key) => setActiveTabKey(key),
+      }}
+    >
+      {renderTabContent()} {/* 动态渲染内容 */}
+      
     </PageContainer>
   );
 };

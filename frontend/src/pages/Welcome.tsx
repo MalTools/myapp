@@ -1,8 +1,8 @@
 import { PageContainer } from '@ant-design/pro-components';
 import { useModel } from '@umijs/max';
-import { Card, theme, Typography } from 'antd';
+import { Card, Image, theme, Typography } from 'antd';
 import React from 'react';
-const { Title, Paragraph, Text} = Typography;
+const { Title, Paragraph, Text } = Typography;
 
 /**
  * 每个单独的卡片，为了复用样式抽成了组件
@@ -67,8 +67,6 @@ const InfoCard: React.FC<{
       </div>
       <div
         style={{
-          // fontSize: '16px',
-          // color: token.colorTextSecondary,
           textAlign: 'justify',
           lineHeight: '22px',
           marginBottom: 8,
@@ -118,9 +116,9 @@ const Welcome: React.FC = () => {
             }}
           >
             Hi! We are delighted to have you join us in reshaping how privacy practices are assessed
-            and understood! <br></br>This platform is designed to empower users like you to voice
-            your opinions on app privacy practices, helping create a more transparent and
-            user-centered digital environment.
+            and understood! This platform is designed to empower users like you to voice your
+            opinions on app privacy practices, helping create a more transparent and user-centered
+            digital environment.
           </Paragraph>
           <div
             style={{
@@ -147,7 +145,7 @@ const Welcome: React.FC = () => {
               title="What You’ll Do"
               desc={
                 <>
-                  <Paragraph>As a participant, your role is simple but impactful:</Paragraph>
+                  {/* <Paragraph>As a participant, your role is simple but impactful:</Paragraph> */}
                   <Paragraph>
                     1. <Text strong>Review Scenarios:</Text> You’ll be presented with scenarios of
                     an app's sensitive data access behavior, as well as information about the app's
@@ -187,22 +185,84 @@ const Welcome: React.FC = () => {
               }
             />
           </div>
-          <br></br>
-          <Title level={3}>Thank You for Joining Us!</Title>
-          <Paragraph style={{
-              fontSize: '16px',
-            }}>
-            Participating is straightforward, and you can share your thoughts at your own pace. Your
-            contributions are anonymous and confidential, ensuring your privacy while enabling us to
-            gather meaningful data.
-          </Paragraph>
-          <Paragraph style={{
-              fontSize: '16px',
-            }}>
-            By participating, you are helping to create a safer, more privacy-conscious app
-            ecosystem. Let’s work together to make a difference in how privacy is understood,
-            respected, and implemented!
-          </Paragraph>
+
+          <Typography style={{ marginTop: '24px' }}>
+            <Title level={3}>How to Answer the Questions</Title>
+
+            {/* 页面内容安排 */}
+            <Paragraph>
+              Each app category is organized into a single evaluation page. At the top of the page,
+              you will see a set of keywords describing the features and functionalities of the app
+              category (see the screenshot below). Each category contains several representative
+              apps, shown as tabs. Each tab provides:
+            </Paragraph>
+            <ul>
+              <li>
+                A description of the app, outlining its main features and privacy-relevant aspects.
+              </li>
+              <li>Questions related to the app's privacy behaviors.</li>
+            </ul>
+            <Paragraph>
+            <Text strong style={{ color: '#fa541c' }}>YOUR TASK</Text> is to answer all the questions for each app tab in the category. Completing
+              answers for all representative apps in a category means you have completed the privacy
+              evaluation for that category. We encourage you to evaluate <Text strong style={{ color: '#fa541c' }}>AT LEAST THREE categories</Text>
+              from the left navigation panel.
+            </Paragraph>
+
+            {/* 添加示例页面截图 */}
+            <div style={{ textAlign: 'center', marginBottom: '16px' }}>
+              <Image
+                width="90%" // 图片宽度
+                src="/images/Weather/screenshot.jpg" // 替换为实际图片路径
+                alt="Example of App Category Page"
+              />
+            </div>
+
+            {/* 每个问题的说明 */}
+            <Paragraph>
+              For each question, you will be presented with a specific scenario where the app
+              accesses certain data (e.g., location, microphone) for a stated purpose. You will rate
+              your comfort level using the following scale:
+            </Paragraph>
+            <ul>
+              <li>
+                <Text strong>Uncomfortable:</Text> You feel strongly opposed to the described
+                behavior.
+              </li>
+              <li>
+                <Text strong>So-so:</Text> You feel neutral or have minor concerns about the
+                described behavior.
+              </li>
+              <li>
+                <Text strong>Comfortable:</Text> You feel completely fine with the described
+                behavior.
+              </li>
+              <li>
+                <Text strong>Need more information:</Text> You cannot make a decision without
+                additional details.
+              </li>
+            </ul>
+
+            {/* 鼓励用户参与 */}
+            <Paragraph>
+            <Text strong style={{ color: '#52c41a' }}>There is NO RIGHT or WRONG answer.</Text> Please respond based on your personal feelings and
+              perspectives. Your feedback is anonymous and critical to improving app privacy
+              practices across the ecosystem.
+            </Paragraph>
+          </Typography>
+
+          {/* 感谢内容 */}
+      <Typography style={{ marginTop: '24px' }}>
+        <Title level={3}>Thank You for Joining Us!</Title>
+        <Paragraph>
+          Participating is simple and anonymous, and you can share your thoughts at your own pace. By contributing, you are helping to shape a safer,
+          more privacy-conscious app ecosystem. Together, let’s work to ensure that user privacy is
+          better understood, respected, and implemented!
+        </Paragraph>
+      </Typography>
+   
+
+          
           <Paragraph
             style={{
               fontSize: '16px',

@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import { List, Radio, Input } from "antd";
+import { List, Radio, Input,Typography } from "antd";
 import type { RadioChangeEvent } from "antd";
 import { FrownOutlined, MehOutlined, SmileOutlined } from "@ant-design/icons";
+const { Text } = Typography;
 
 interface QuestionItemProps {
-  question: string;
+  question: React.ReactNode;
+  description: React.ReactNode;
   index: number;
   onAnswerChange: (index: number, value: { answer: number; moreInfo?: string }) => void; // 回调函数
 }
 
-const QuestionItem: React.FC<QuestionItemProps> = ({ question, index, onAnswerChange }) => {
+const QuestionItem: React.FC<QuestionItemProps> = ({ question, description, index, onAnswerChange }) => {
   const [value, setValue] = useState(0); // 存储用户选择的答案
   const [needMoreInfo, setNeedMoreInfo] = useState(false); // 控制是否显示额外信息输入框
   const [moreInfo, setMoreInfo] = useState(""); // 存储额外信息
@@ -40,8 +42,10 @@ const QuestionItem: React.FC<QuestionItemProps> = ({ question, index, onAnswerCh
 
   return (
     <List.Item key={index}>
-      <List.Item.Meta title={question} />
-
+      <List.Item.Meta 
+      title={question}
+      description={description}/>
+      
       {/* 单选按钮组 */}
       <Radio.Group
         onChange={handleRadioChange}
@@ -69,7 +73,7 @@ const QuestionItem: React.FC<QuestionItemProps> = ({ question, index, onAnswerCh
           description={
             <Input
               showCount
-              maxLength={30}
+              maxLength={120}
               placeholder="Please specify what additional information you need."
               value={moreInfo}
               onChange={handleMoreInfoChange}
