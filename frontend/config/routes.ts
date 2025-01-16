@@ -31,7 +31,7 @@ export default [
   {
     path: '/Survey',
     name: 'Survey',
-    // icon: 'smile',
+    icon: 'crown',
     component: './PrivacyRiskSurvey',
   },
   // {
@@ -58,27 +58,47 @@ export default [
     component: './Category_Weather',
   },
   {
+    name: 'Social',
+    path: '/categories/social',
+    component: './Category_Social',
+  },
+  {
+    name: 'Events',
+    path: '/categories/events',
+    component: './Category_Events',
+  },
+  {
+    path: '/categories/comics',
+    name: 'Comics',    
+    component: './Category_Comics',
+  },
+  {
     path: '/categories/tools',
     name: 'Tools',
     // icon: 'crown',
     routes: [
       {
         path: '/categories/tools',
-        redirect: '/categories/tools/tool1',
+        redirect: '/categories/tools/translator-tools',
       },
       {
-        path: '/categories/tools/tool1',
-        name: 'Tool-1',
-        component: './Category_TOOL_1',
+        path: '/categories/tools/translator-tools',
+        name: 'Tool-Translator',
+        component: './Category_Tools_Translator',
       },
       {
-        path: '/categories/tools/tool2',
-        name: 'Tool-2',
-        component: './Category_TOOL_2',
+        path: '/categories/tools/scanner-tools',
+        name: 'Tool-Scanner',
+        component: './Category_Tools_Scanner',
+      },
+      {
+        path: '/categories/tools/vpn-tools',
+        name: 'Tool-VPN Proxy',
+        component: './Category_Tools_VPN',
       },
     ],
   },
-  
+
   // {
   //   name: 'list.table-list',
   //   icon: 'table',

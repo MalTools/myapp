@@ -1,8 +1,10 @@
 import DynamicQuestionList from '@/components/DynamicQuestionList';
-import { useModel } from '@umijs/max';
-import { Card, Divider, Typography } from 'antd';
-import React, { useRef } from 'react';
 import GuidingResponseTips from '@/components/GuidingResponseTips';
+import ScrollImages from '@/components/ScrollImages';
+import { showImageModal } from '@/components/utils';
+import { useModel } from '@umijs/max';
+import { Card, Typography } from 'antd';
+import React, { useRef } from 'react';
 
 const { Title, Text } = Typography;
 
@@ -11,34 +13,114 @@ const App1: React.FC = () => {
   const currentUser = initialState?.currentUser?.name || 'Anonymous'; // 默认值为 "Anonymous"
   const carouselRef = useRef<HTMLDivElement>(null);
   const questions = [
-    { 
-      question: <Title level={5}>Precise <mark>location</mark> for <span style={{ color: "green" }}>app features</span>:</Title>, 
-      description: <Text>The app accesses your precise location for weather updates. Examples include real-time conditions and personalized forecasts.</Text>},
-    { question: <Title level={5}>Precise <mark>location</mark> for <span style={{ color: "#1890ff" }}>third-party advertising</span> services:</Title>, 
-      description: <Text>The app accesses your precise location to deliver personalized advertisements.</Text>
+    {
+      question: (
+        <Title level={5}>
+          Precise <mark>location</mark> for <span style={{ color: 'green' }}>app features</span>:
+        </Title>
+      ),
+      description: (
+        <Text>
+          The app accesses your precise location for weather updates. Examples include real-time
+          conditions and personalized forecasts.
+        </Text>
+      ),
     },
-    { question: <Title level={5}>Microphone for app features:</Title>,
-      description: <Text>The app accesses your microphone to enable voice input,  such as voice commands for interacting with the app.</Text>
-     },
+    {
+      question: (
+        <Title level={5}>
+          Precise <mark>location</mark> for <span style={{ color: '#1890ff' }}>advertising</span>{' '}
+          related services:
+        </Title>
+      ),
+      description: (
+        <Text>The app accesses your precise location to deliver personalized advertisements.</Text>
+      ),
+    },
+    {
+      question: (
+        <Title level={5}>
+          Precise <mark>location</mark> for <span style={{ color: 'purple' }}>analytics</span>{' '}
+          related uses:
+        </Title>
+      ),
+      description: (
+        <Text>
+          The app uses your precise location for analytic purposes, such as analyzing app usage
+          patterns in different geographic regions.
+        </Text>
+      ),
+    },
+    {
+      question: (
+        <Title level={5}>
+          <mark>Camera</mark> for <span style={{ color: '#1890ff' }}>advertising</span> related
+          services:
+        </Title>
+      ),
+      description: (
+        <Text>
+          The app accesses your camera to support interactive advertising features, such as
+          augmented reality (AR).
+        </Text>
+      ),
+    },
+    {
+      question: (
+        <Title level={5}>
+          <mark>Camera</mark> for <span style={{ color: 'green' }}>app features</span>:
+        </Title>
+      ),
+      description: (
+        <Text>
+          The app accesses your camera to allow users to capture and share weather-related content,
+          such as photos with weather overlays.
+        </Text>
+      ),
+    },
+    {
+      question: (
+        <Title level={5}>
+          Read <mark>external storage</mark> for{' '}
+          <span style={{ color: 'green' }}>app features</span>:
+        </Title>
+      ),
+      description: (
+        <Text>
+          The app accesses external storage to let users customize widget themes, weather icons, or
+          wallpapers by selecting assets stored in external storage.
+        </Text>
+      ),
+    },
+    {
+      question: (
+        <Title level={5}>
+          Read <mark>external storage</mark> for{' '}
+          <span style={{ color: '#1890ff' }}>advertising</span> related services:
+        </Title>
+      ),
+      description: (
+        <Text>
+          The app accesses external storage to load cached ad-related media, such as images or
+          videos, for advertisement purposes.
+        </Text>
+      ),
+    },
+    {
+      question: (
+        <Title level={5}>
+          <mark>Calendar</mark> for <span style={{ color: 'green' }}>app features</span>:
+        </Title>
+      ),
+      description: (
+        <Text>
+          The app accesses your calendar to display upcoming events on its widget, providing an
+          overview of your daily schedule alongside weather information.
+        </Text>
+      ),
+    },
   ];
 
-  const scrollLeft = () => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollBy({
-        left: -200, // 调整滚动距离
-        behavior: 'smooth',
-      });
-    }
-  };
-
-  const scrollRight = () => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollBy({
-        left: 200, // 调整滚动距离
-        behavior: 'smooth',
-      });
-    }
-  };
   return (
     <div>
       <Card>
@@ -102,61 +184,19 @@ const App1: React.FC = () => {
                     objectFit: 'cover',
                     borderRadius: '8px',
                     boxShadow: '0 2px 6px rgba(0, 0, 0, 0.2)',
+                    cursor: 'pointer',
                   }}
+                  onClick={() => showImageModal(item.src)}
                 />
               </div>
             ))}
           </div>
 
-          {/* 左滑按钮 */}
-          <button
-            type="button"
-            onClick={scrollLeft}
-            style={{
-              position: 'absolute',
-              top: '50%',
-              left: '-15px',
-              transform: 'translateY(-50%)',
-              zIndex: 1,
-              background: 'white',
-              border: '1px solid #ddd',
-              borderRadius: '50%',
-              width: '50px',
-              height: '50px',
-              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
-              cursor: 'pointer',
-              fontSize: '20px',
-            }}
-          >
-            &lt;
-          </button>
-
-          {/* 右滑按钮 */}
-          <button
-            type="button"
-            onClick={scrollRight}
-            style={{
-              position: 'absolute',
-              top: '50%',
-              right: '-15px',
-              transform: 'translateY(-50%)',
-              zIndex: 1,
-              background: 'white',
-              border: '1px solid #ddd',
-              borderRadius: '50%',
-              width: '50px',
-              height: '50px',
-              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
-              cursor: 'pointer',
-              fontSize: '20px',
-            }}
-          >
-            &gt;
-          </button>
+          <ScrollImages carouselRef={carouselRef} />
         </div>
 
         {/* 描述文字 */}
-        <div style={{ marginTop: '16px', textAlign: 'left', padding: '0 16px' }}>
+        <div style={{ marginTop: '2px', textAlign: 'left', padding: '0 16px' }}>
           <Title level={4}>About this app:</Title>
           <p>
             🌤 <b>24x7 Weather Forecasts</b>
@@ -208,13 +248,18 @@ const App1: React.FC = () => {
             Stay in sync with nature with our dynamic display of sunrise and sunset times.
           </p>
         </div>
-        </Card>
+      </Card>
       {/* <Divider style={{ borderColor: 'blue' }} orientation="center">
         
       </Divider> */}
       <GuidingResponseTips />
       <Card>
-      <DynamicQuestionList questions={questions} currentUser={currentUser} appNumber={1} />
+        <DynamicQuestionList
+          questions={questions}
+          currentUser={currentUser}
+          appNumber={1}
+          tableName="weather"
+        />
       </Card>
     </div>
   );

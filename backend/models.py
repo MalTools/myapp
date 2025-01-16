@@ -10,6 +10,7 @@ from sqlalchemy import Table
 
 db = SQLAlchemy()
 
+
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
     id = db.Column(db.String(21), primary_key=True, default=lambda: generate())  # 使用 nanoid 生成唯一的 ID
@@ -47,60 +48,36 @@ class Survey(db.Model):
 Base = declarative_base()
 
 
-class DynamicTableBase:
-    id = Column(Integer, primary_key=True, autoincrement=True)  # 自增主键
-    username = Column(String(80), nullable=False)  # 用户名
-    app_number = Column(Integer, nullable=False)  # 应用编号
-    question_number = Column(Integer, nullable=False)  # 问题编号
-    question = Column(String(255), nullable=False)  # 问题描述
-    answer = Column(String(255), nullable=False)  # 用户答案
-
-
-# 动态创建表的工厂函数
-class DynamicTableBase:
-    id = Column(Integer, primary_key=True, autoincrement=True)  # 自增主键
-    username = Column(String(80), nullable=False)  # 用户名
-    app_number = Column(Integer, nullable=False)  # 应用编号
-    question_number = Column(Integer, nullable=False)  # 问题编号
-    question = Column(String(255), nullable=False)  # 问题描述
-    answer = Column(String(255), nullable=False)  # 用户答案
-
-
-# 动态创建表的工厂函数
 def get_or_create_table(table_name):
-    metadata = db.metadata  # 获取数据库的 metadata
+    metadata = db.metadata
 
-    # 检查表是否存在
     inspector = inspect(db.engine)
-    if inspector.has_table(table_name):
+    if inspector.has_table(f"user_responses_{table_name}"):
         print(f"表 {table_name} 已经存在，使用现有表")
 
-        # 使用 db.Table 来加载现有表
-        dynamic_table = Table(table_name, metadata, autoload_with=db.engine)
+        dynamic_table = Table(f"user_responses_{table_name}", metadata, autoload_with=db.engine)
 
-        # 将 Table 转换为具有 query 功能的模型类
         class DynamicTable(db.Model):
             __table__ = dynamic_table
-            __tablename__ = table_name  # 设置动态表名
+            __tablename__ = f"user_responses_{table_name}"
 
         return DynamicTable
 
     else:
         print(f"表 {table_name} 不存在，创建新表")
 
-        # 如果表不存在，则创建新的动态表
         class DynamicTable(db.Model):
-            __tablename__ = table_name
-            extend_existing=True,
-            exclude_from_alembic = True  # 确保不在 Alembic 管理下
-            id = db.Column(db.Integer, primary_key=True, autoincrement=True)  # 自增主键
-            username = db.Column(db.String(80), nullable=False)  # 用户名
-            app_number = db.Column(db.Integer, nullable=False)  # 应用编号
-            question_number = db.Column(db.Integer, nullable=False)  # 问题编号
-            question = db.Column(db.String(255), nullable=False)  # 问题描述
-            answer = db.Column(db.String(255), nullable=False)  # 用户答案
+            __tablename__ = f"user_responses_{table_name}"
+            id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+            username = db.Column(db.String(80), nullable=False)
+            app_number = db.Column(db.Integer, nullable=False)
+            question_number = db.Column(db.Integer, nullable=False)
+            question = db.Column(db.String(255), nullable=False)
+            answer = db.Column(db.String(255), nullable=False)
 
         # 创建表
         db.create_all()
         return DynamicTable
+
+
 

@@ -49,4 +49,13 @@ export default {
   'menu.editor.flow': '流程编辑器',
   'menu.editor.mind': '脑图编辑器',
   'menu.editor.koni': '拓扑编辑器',
+  "menu.Survey": "调研",
+  "menu.Weather": "天气",
+  "menu.Social": "社交",
+  "menu.Events": "活动",
+  "menu.Comics": "动漫",
+  "menu.Tools": "工具",
+  "menu.Tools.Tool-Translator": "翻译器",
+  "menu.Tools.Tool-Scanner": "扫描器",
+  "menu.Tools.Tool-VPN Proxy": "VPN代理"
 };

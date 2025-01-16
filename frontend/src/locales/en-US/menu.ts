@@ -49,4 +49,13 @@ export default {
   'menu.editor.flow': 'Flow Editor',
   'menu.editor.mind': 'Mind Editor',
   'menu.editor.koni': 'Koni Editor',
+  "menu.Survey": "Survey",
+  "menu.Weather": "Weather",
+  "menu.Social": "Social",
+  "menu.Events": "Events",
+  "menu.Comics": "Comics",
+  "menu.Tools": "Tools",
+  "menu.Tools.Tool-Translator": "Translator",
+  "menu.Tools.Tool-Scanner": "Scanner",
+  "menu.Tools.Tool-VPN Proxy": "VPN Proxy"
 };

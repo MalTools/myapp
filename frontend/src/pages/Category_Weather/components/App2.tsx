@@ -1,301 +1,216 @@
-import {Button, Card, Divider, List, message, Typography} from 'antd';
-import React, { useRef, useState } from 'react';
-import QuestionItem from '../../../components/QuestionItem';
-import SubmitResult from '@/components/SubmitResult';
-import { useModel } from "@umijs/max";
+import DynamicQuestionList from '@/components/DynamicQuestionList';
+import GuidingResponseTips from '@/components/GuidingResponseTips';
+import { useModel } from '@umijs/max';
+import { Card, Typography } from 'antd';
+import React, { useRef } from 'react';
+import { showImageModal } from '@/components/utils';
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
-//在这里添加问题描述
-const DynamicQuestionList: React.FC<{ currentUser: string }> = ({ currentUser }) => {
-  const [questions] = useState([
-    "test question123",
-    "test question456",
-  ]);
-
-  const [answers, setAnswers] = useState<{ [key: number]: { answer: number; moreInfo?: string } }>(
-    {}
-  );
-  const [complete, setComplete] = useState(false);
-
-  const handleAnswerChange = (index: number, value: { answer: number; moreInfo?: string }) => {
-    setAnswers((prev) => ({
-      ...prev,
-      [index]: value,
-    }));
-  };
-
-
-  const handleSubmit = async () => {
-    if (questions.length === 0) {
-      message.error("问题列表不能为空！");
-      return;
-    }
-
-    // 构建问题和答案的对应关系
-    const questionAnswerList = questions.map((question, index) => ({
-      question,
-      question_number: index + 1, // 问题编号从 1 开始
-      answer: answers[index]?.answer || 0, // 如果用户没有回答，默认为 0
-      moreInfo: answers[index]?.moreInfo || undefined, // 如果用户没有提供额外信息，则为 undefined
-    }));
-
-    // 构建最终提交的数据
-    const payload = {
-      name: currentUser || "Anonymous", // 如果未获取到用户名，则默认使用 "Anonymous"
-      status: "la1", // 固定的状态值，作为数据库中表的名称存储
-      app_number: 2, // 固定的应用编号，不同应用使用不同编号
-      responses: questionAnswerList, // 问题和答案的列表
-    };
-
-    console.log("提交的内容:", payload);
-
-    try {
-      const response = await fetch("http://localhost:5000/api/submit_questions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-
-      if (response.ok) {
-        message.success("提交成功！");
-        setComplete(true);
-      } else {
-        const result = await response.json();
-        message.error(`提交失败: ${result.message}`);
-      }
-    } catch (error) {
-      console.error("提交错误:", error);
-      message.error("提交失败，请稍后重试！");
-    }
-  };
+const App2: React.FC = () => {
+  const { initialState } = useModel('@@initialState');
+  const currentUser = initialState?.currentUser?.name || 'Anonymous'; // 默认值为 "Anonymous"
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const questions = [
+    {
+      question: (
+        <Title level={5}>
+          Precise <mark>location</mark> for <span style={{ color: 'green' }}>app features</span>:
+        </Title>
+      ),
+      description: (
+        <Text>
+          The app accesses your precise location to provide accurate, real-time climate risk
+          information tailored to your geographic context.
+        </Text>
+      ),
+    },
+    {
+      question: (
+        <Title level={5}>
+          <mark>Camera</mark> for <span style={{ color: 'green' }}>app features</span> :
+        </Title>
+      ),
+      description: (
+        <Text>
+          The app accesses your camera to allow you to capture profile images or document climate
+          risks and environmental events by taking photos for reporting or visual evidence.
+        </Text>
+      ),
+    },
+    {
+      question: (
+        <Title level={5}>
+          Read <mark>external storage</mark> for{' '}
+          <span style={{ color: 'green' }}>app features</span> :
+        </Title>
+      ),
+      description: (
+        <Text>
+          The app accesses external storage to let you set custom wallpapers or themes using images
+          from your device's gallery, or to upload images for risk reporting or climate-related
+          alerts.
+        </Text>
+      ),
+    },
+    {
+      question: (
+        <Title level={5}>
+          <mark>Contacts</mark> for <span style={{ color: 'green' }}>app features</span> (emergency
+          notifications):
+        </Title>
+      ),
+      description: (
+        <Text>
+          The app accesses your contact list to let you set emergency contacts who can be notified
+          or alerted during a climate-related emergency or risk event.
+        </Text>
+      ),
+    },
+    {
+      question: (
+        <Title level={5}>
+          <mark>Accounts</mark> for <span style={{ color: 'purple' }}>analytics</span> related uses:
+        </Title>
+      ),
+      description: (
+        <Text>
+          The app accesses your account information to track user interactions or behavior within
+          the app for analytics and event tracking purposes.
+        </Text>
+      ),
+    },
+    {
+      question: (
+        <Title level={5}>
+          <mark>Accounts</mark> for <span style={{ color: 'green' }}>app features</span> (external
+          service integration):
+        </Title>
+      ),
+      description: (
+        <Text>
+          The app accesses your account information to integrate with external services like Google
+          or Microsoft, enabling features like calendar syncing or sending alerts to linked
+          services.
+        </Text>
+      ),
+    },
+  ];
 
   return (
-    <>
-      <List
-        bordered
-        itemLayout="vertical"
-        dataSource={questions}
-        renderItem={(question, index) => (
-          <QuestionItem
-            question={question}
-            index={index}
-            onAnswerChange={handleAnswerChange}
-          />
-        )}
-      />
-      <div style={{ marginTop: "40px", textAlign: "center" }}>
-        <Button type="primary" onClick={handleSubmit}>
-          Submit
-        </Button>
-      </div>
-      {complete && <SubmitResult />}
-    </>
+    <div>
+      <Card>
+        <div
+          style={{
+            position: 'relative',
+            width: '100%',
+          }}
+        >
+          {/* 小标题 */}
+          <div style={{ textAlign: 'left', marginBottom: '2px' }}>
+            <h2 style={{ margin: 0, fontSize: '18px' }}>
+              <img
+                src={'/icons/Weather-Rainbird.webp'}
+                alt="Icon 1"
+                style={{ width: 30, borderRadius: '6px', marginLeft: 0, marginRight: 8 }}
+              />
+              Rainbird - climate risk alarm
+            </h2>
+          </div>
+
+          {/* 图片滑动区域 */}
+          <div
+            // ref={carouselRef}
+            style={{
+              display: 'flex',
+              // justifyContent: 'space-around', //space-around
+              alignItems: 'center',
+              gap: '16px',
+              overflowX: 'hidden', //scroll
+              scrollBehavior: 'smooth',
+              padding: '16px 0',
+            }}
+          >
+            {[
+              { src: '/images/Weather/Rainbird/image1.webp' },
+              { src: '/images/Weather/Rainbird/image2.webp' },
+              { src: '/images/Weather/Rainbird/image3.webp' },
+              { src: '/images/Weather/Rainbird/image4.webp' },
+              { src: '/images/Weather/Rainbird/image5.webp' },
+            ].map((item, index) => (
+              <div
+                key={index}
+                style={{
+                  width: '180px',
+                  flexShrink: 0,
+                  textAlign: 'center',
+                }}
+              >
+                <img
+                  src={item.src}
+                  alt={`Image ${index + 1}`}
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                    objectFit: 'cover',
+                    borderRadius: '8px',
+                    boxShadow: '0 2px 6px rgba(0, 0, 0, 0.2)',
+                    cursor: 'pointer',
+                  }}
+                  onClick={() => showImageModal(item.src)}
+                />
+              </div>
+            ))}
+          </div>
+          {/* <ScrollImages carouselRef={carouselRef} /> */}
+        </div>
+
+        {/* 描述文字 */}
+        <div style={{ marginTop: '2px', textAlign: 'left', padding: '0 16px' }}>
+          <Title level={4}>About this app:</Title>
+          <p>
+            Company identity, RainbirdGEO, came from a combination of &#39;Rainbird&#39;, which
+            announces rain with its cries, and &#39;GEO&#39;, which means both Earth and satellites.
+            It analyzes state-of-the-art Earth observation satellites to send forecasts and provides
+            services that make it easy to share risk information within/between the communities.{' '}
+            <br /> <br />
+            Easy functions of &#39;RainbirdGEO&#39; application.
+            <br /> <br />* Rain forecast by satellite algorithm
+            <br />
+            Get &#39;in advance&#39; rain forecast!
+            <br />
+            RainbirdGEO provides location-based rain forecast alarms with the world-class algorithm
+            developed by RainbirdGEO using high-quality data provided by Korean geostationary
+            satellites. You can prepare in advance for sudden rainfall.
+            <br /> <br />
+            * User-directed warning reporting
+            <br />
+            You can report any warning you find directly through the app. Various warnings such as
+            lightning, fire, heat wave, heavy rain, strong wind, shortage of water, and flood can be
+            reported. You can also share risk information with other users by adding photos and
+            comments.
+            <br /> <br />* Various warning notifications near your location <br />
+            You can receive notifications of various warnings that are happening around you. You can
+            quickly receive notifications from other users&#39; reports, such as sudden fire.
+            <br /> <br />* Receive local weather information
+            <br />
+            You can easily check local weather information through the RainbirdGEO app. Check the
+            current local weather now.
+            <br />
+          </p>
+        </div>
+      </Card>
+      <GuidingResponseTips />
+      <Card>
+        <DynamicQuestionList
+          questions={questions}
+          currentUser={currentUser}
+          appNumber={2}
+          tableName="weather"
+        />
+      </Card>
+    </div>
   );
 };
 
-const App2: React.FC = () => {
-  const { initialState } = useModel("@@initialState");
-  const currentUser = initialState?.currentUser?.name || "Anonymous"; // 默认值为 "Anonymous"
-  const carouselRef = useRef<HTMLDivElement>(null);
-
-  const scrollLeft = () => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollBy({
-        left: -200, // 调整滚动距离
-        behavior: 'smooth',
-      });
-    }
-  };
-
-  const scrollRight = () => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollBy({
-        left: 200, // 调整滚动距离
-        behavior: 'smooth',
-      });
-    }
-  };
-    return (
-      <>
-        <Card>
-          <div
-            style={{
-              position: 'relative',
-              overflow: 'hidden',
-              width: '100%',
-              margin: '0 auto',
-            }}
-          >
-            {/* 小标题 */}
-            <div style={{textAlign: 'left', marginBottom: '16px'}}>
-              <h2 style={{margin: 0, fontSize: '20px'}}>
-                <img
-                  src={'/icons/Weather-Transparentclockandweather.webp'}
-                  alt="Icon 1"
-                  style={{width: 30, borderRadius: '6px', marginLeft: 0, marginRight: 8}}
-                />
-                Transparent clock and weather
-              </h2>
-            </div>
-
-            {/* 图片滑动区域 */}
-            <div
-              ref={carouselRef}
-              style={{
-                display: 'flex',
-                justifyContent: 'space-around', //space-around
-                alignItems: 'center',
-                gap: '10px',
-                overflowX: 'hidden', //scroll
-                scrollBehavior: 'smooth',
-                padding: '16px 0',
-              }}
-            >
-              {[
-                {src: '/images/Weather/Transparentclockandweather/image1.webp'},
-                {src: '/images/Weather/Transparentclockandweather/image2.webp'},
-                {src: '/images/Weather/Transparentclockandweather/image3.webp'},
-                {src: '/images/Weather/Transparentclockandweather/image4.webp'},
-                {src: '/images/Weather/Transparentclockandweather/image5.webp'},
-                {src: '/images/Weather/Transparentclockandweather/image6.webp'},
-                {src: '/images/Weather/Transparentclockandweather/image7.webp'},
-                {src: '/images/Weather/Transparentclockandweather/image8.webp'},
-              ].map((item, index) => (
-                <div
-                  key={index}
-                  style={{
-                    width: '180px',
-                    flexShrink: 0,
-                    textAlign: 'center',
-                  }}
-                >
-                  <img
-                    src={item.src}
-                    alt={`Image ${index + 1}`}
-                    style={{
-                      width: '100%',
-                      height: 'auto',
-                      objectFit: 'cover',
-                      borderRadius: '8px',
-                      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.2)',
-                    }}
-                  />
-                </div>
-              ))}
-            </div>
-
-            {/* 左滑按钮 */}
-            <button
-              type="button"
-              onClick={scrollLeft}
-              style={{
-                position: 'absolute',
-                top: '50%',
-                left: '-15px',
-                transform: 'translateY(-50%)',
-                zIndex: 1,
-                background: 'white',
-                border: '1px solid #ddd',
-                borderRadius: '50%',
-                width: '50px',
-                height: '50px',
-                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
-                cursor: 'pointer',
-                fontSize: '20px',
-              }}
-            >
-              &lt;
-            </button>
-
-            {/* 右滑按钮 */}
-            <button
-              type="button"
-              onClick={scrollRight}
-              style={{
-                position: 'absolute',
-                top: '50%',
-                right: '-15px',
-                transform: 'translateY(-50%)',
-                zIndex: 1,
-                background: 'white',
-                border: '1px solid #ddd',
-                borderRadius: '50%',
-                width: '50px',
-                height: '50px',
-                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
-                cursor: 'pointer',
-                fontSize: '20px',
-              }}
-            >
-              &gt;
-            </button>
-          </div>
-
-          {/* 描述文字 */}
-          <div style={{marginTop: '16px', textAlign: 'left', padding: '0 16px'}}>
-            <Title level={4}>About this app:</Title>
-            <p>
-              🌤 <b>24x7 Weather Forecasts</b>
-              <br/>
-              Stay updated with our detailed hourly weather forecasts. Check the latest weather
-              conditions at any time, anywhere. From hourly to 15-day forecasts, we&#39;ve got you
-              covered.
-            </p>
-            <p>
-              ⚡ <b>Severe Weather Alerts</b>
-              <br/>
-              Stay safe with all types of severe weather alerts. Our app instantly notifies you of
-              potential severe weather, upcoming weather conditions, alerts for high or low
-              temperatures, alerts for strong winds and more.
-            </p>
-            <p>
-              🌎 <b>Radar Maps</b>
-              <br/>
-              Track hazardous weather conditions with our radar maps. Switch between radar,
-              high-resolution satellite, and rainfall, temperature and other maps for real-time
-              tracking data.
-            </p>
-            <p>
-              🌦 <b>Weather Forecasting</b>
-              <br/>
-              We support live weather forecasts for global locations and provide detailed 7 to 15-day
-              weather information. Get insights on rainfall forecasts, &#39;feels like&#39;
-              temperatures, air quality index (AQI), UV index, humidity, visibility, wind direction,
-              wind speed, and pressure changes.
-            </p>
-            <p>
-              🏞 <b>Hourly Activity Forecast</b>
-              <br/>
-              Planning an outdoor adventure? Our app&#39;s unique Indices feature provides weather
-              suitability for popular outdoor activities like hiking, running, camping, kayaking,
-              fishing, and hunting for the next 48 hours. Make the most of your outdoor pursuits with
-              our easy to use weather insights.
-            </p>
-            <p>
-              📱 <b>Customizable Widgets</b>
-              <br/>
-              Enhance your home screen with our customizable widgets. Get weather updates right on
-              your home screen with our beautiful weather &amp; clock widgets. Choose from a variety
-              of styles and sizes to match your aesthetic.
-            </p>
-            <p>
-              🌙 <b>Sun &amp; Moon Tracker</b>
-              <br/>
-              Stay in sync with nature with our dynamic display of sunrise and sunset times.
-            </p>
-          </div>
-        </Card>
-        <Divider style={{borderColor: 'blue'}} orientation="center">
-          Please answer your perception in the following privacy scenarios: Do you feel comfortable for this?
-        </Divider>
-        <DynamicQuestionList currentUser={currentUser} />
-
-      </>
-    );
-  };
-
 export default App2;
-

@@ -1,7 +1,9 @@
+import { Button, List, message } from 'antd';
 import React, { useState } from 'react';
-import { List, Button, message } from 'antd';
 import QuestionItem from './QuestionItem';
-import Card from 'antd/es/card/Card';
+// import Card from 'antd/es/card/Card';
+import { extractTextFromElement } from './utils';
+import SubmitResult from './SubmitResult';
 
 interface Question {
   question: React.ReactNode;
@@ -17,14 +19,16 @@ interface DynamicQuestionListProps {
   questions: Question[];
   currentUser: string;
   appNumber: number;
-  onSubmitSuccess?: () => void;  //可选自定义行为
+  tableName: string;
+  onSubmitSuccess?: () => void; //可选自定义行为
 }
 
 const DynamicQuestionList: React.FC<DynamicQuestionListProps> = ({
   questions,
   currentUser,
   appNumber,
-  onSubmitSuccess,  //可选自定义行为
+  tableName,
+  onSubmitSuccess, //可选自定义行为
 }) => {
   const [answers, setAnswers] = useState<{ [key: number]: Answer }>({});
   const [complete, setComplete] = useState(false);
@@ -38,17 +42,18 @@ const DynamicQuestionList: React.FC<DynamicQuestionListProps> = ({
 
   const defaultSuccessHandler = () => {
     console.log('Survey was successfully submitted!');
-    message.success('感谢您的参与！调查问卷已提交成功。');
+    message.success('The answers were successfully submitted. Thank you!');
   };
 
   const handleSubmit = async () => {
+    // console.log('questions.length=',  questions.length)
     if (questions.length === 0) {
       message.error('问题列表不能为空！');
       return;
     }
 
     const questionAnswerList = questions.map((q, index) => ({
-      question: q.question,
+      question: extractTextFromElement(q.question),
       question_number: index + 1,
       answer: answers[index]?.answer || 0,
       moreInfo: answers[index]?.moreInfo || undefined,
@@ -56,7 +61,7 @@ const DynamicQuestionList: React.FC<DynamicQuestionListProps> = ({
 
     const payload = {
       name: currentUser || 'Anonymous',
-      status: 'weather',
+      status: tableName,
       app_number: appNumber,
       responses: questionAnswerList,
     };
@@ -64,7 +69,7 @@ const DynamicQuestionList: React.FC<DynamicQuestionListProps> = ({
     console.log('提交的内容:', payload);
 
     try {
-      const response = await fetch('http://localhost:5000/api/submit_questions', {
+      const response = await fetch('http://localhost:8888/api/submit_questions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -73,12 +78,12 @@ const DynamicQuestionList: React.FC<DynamicQuestionListProps> = ({
       });
 
       if (response.ok) {
-        message.success('提交成功！');
+        // message.success('Successfully submitted!');
         setComplete(true);
         (onSubmitSuccess || defaultSuccessHandler)(); // 如果传入了回调，优先调用传入的；否则使用默认行为
       } else {
         const result = await response.json();
-        message.error(`提交失败: ${result.message}`);
+        message.error(`Failed: ${result.message}`);
       }
     } catch (error) {
       console.error('提交错误:', error);
@@ -93,7 +98,12 @@ const DynamicQuestionList: React.FC<DynamicQuestionListProps> = ({
         itemLayout="vertical"
         dataSource={questions}
         renderItem={(question, index) => (
-          <QuestionItem question={question.question} description={question.description}index={index} onAnswerChange={handleAnswerChange} />
+          <QuestionItem
+            question={question.question}
+            description={question.description}
+            index={index}
+            onAnswerChange={handleAnswerChange}
+          />
         )}
       />
       <div style={{ marginTop: '40px', textAlign: 'center' }}>
@@ -101,7 +111,7 @@ const DynamicQuestionList: React.FC<DynamicQuestionListProps> = ({
           Submit
         </Button>
       </div>
-      {complete && <div>Thank you for completing the survey!</div>}
+      {complete && <SubmitResult />}
     </>
   );
 };

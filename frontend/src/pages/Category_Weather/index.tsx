@@ -1,10 +1,12 @@
 // import { HeartTwoTone, SmileTwoTone } from '@ant-design/icons';
+import CategoryKeywords from '@/components/CategoryKeywords';
 import { PageContainer } from '@ant-design/pro-components';
 import { useIntl } from '@umijs/max';
-import { Flex, Tag, Typography } from 'antd';
+import { Typography } from 'antd';
 import React, { useState } from 'react';
 import App1 from './components/App1';
-import CategoryKeywords from '@/components/CategoryKeywords';
+import App2 from './components/App2';
+import App3 from './components/App3';
 const { Text } = Typography;
 
 const Weather: React.FC = () => {
@@ -24,6 +26,8 @@ const Weather: React.FC = () => {
     'earthquake information',
     'tide information',
     'weather widget',
+    'daily weather',
+    'storms alerts'
   ];
 
   const renderTabContent = () => {
@@ -31,19 +35,9 @@ const Weather: React.FC = () => {
       case '1':
         return <App1 />;
       case '2':
-        return (
-          <div>
-            <h3>App 2 Content</h3>
-            <p>This is the content for App 2.</p>
-          </div>
-        );
+        return <App2 />;
       case '3':
-        return (
-          <div>
-            <h3>App 3 Content</h3>
-            <p>This is the content for App 3.</p>
-          </div>
-        );
+        return <App3 />;
       default:
         return null;
     }
@@ -59,9 +53,7 @@ const Weather: React.FC = () => {
       header={{
         title: 'Weather Category',
       }}
-      content={
-        <CategoryKeywords keywords={weatherKeywords} />
-      }
+      content={<CategoryKeywords keywords={weatherKeywords} />}
       tabList={[
         {
           tab: (
@@ -77,11 +69,29 @@ const Weather: React.FC = () => {
           key: '1',
         },
         {
-          tab: 'App 2',
+          tab: (
+            <>
+              <img
+                src={'/icons/Weather-Rainbird.webp'}
+                alt="Icon 1"
+                style={{ width: 20, borderRadius: '4px', marginLeft: 0, marginRight: 8 }}
+              />{' '}
+              App 2
+            </>
+          ),
           key: '2',
         },
         {
-          tab: 'App 3',
+          tab: (
+            <>
+              <img
+                src={'/icons/Weather-MSNWeather.webp'}
+                alt="Icon 1"
+                style={{ width: 20, borderRadius: '4px', marginLeft: 0, marginRight: 8 }}
+              />{' '}
+              App 3
+            </>
+          ),
           key: '3',
         },
       ]}
@@ -92,7 +102,6 @@ const Weather: React.FC = () => {
       }}
     >
       {renderTabContent()} {/* 动态渲染内容 */}
-      
     </PageContainer>
   );
 };

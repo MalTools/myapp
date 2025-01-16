@@ -10,10 +10,7 @@ from flask_login import LoginManager
 from flask import make_response
 
 
-
-
 app = Flask(__name__)
-
 # 初始化扩展
 app.config.from_object(Config)
 db.init_app(app)
@@ -25,10 +22,10 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 
-
 @login_manager.user_loader
 def load_user(user_id):
     return db.session.get(User, user_id)  # 根据用户 ID 加载用户
+
 
 @login_manager.unauthorized_handler
 def unauthorized():
@@ -49,7 +46,6 @@ def login():
     password = data.get('password')
 
     print(f"收到的用户名: {username}, 密码: {password}")  # 打印接收到的数据，便于调试
-
     # 根据用户名查询用户
     user = User.query.filter_by(username=username).first()
 
@@ -89,7 +85,6 @@ def login():
     return response
 
 
-
 # 路由：获取当前用户信息
 @app.route('/api/currentUser', methods=['GET'])
 @login_required
@@ -123,16 +118,16 @@ def submit_survey():
     try:
         # 获取前端传递的数据
         username = data.get('username')
-        age = int(data.get('age', 0))  # 默认值为 0
-        gender = data.get('gender', '')
-        education = data.get('education', '')
+        age = int(data.get('age'))
+        gender = data.get('gender')
+        education = data.get('education')
         familiar = data.get('techBackground') == 'yes'  # 将 'yes' 转换为 True，'no' 转换为 False
-        time = data.get('appUsage', '')  # 使用前端字段名
-        app_type = ",".join(data.get('appType', []))  # 将列表转换为逗号分隔的字符串
-        sensitive = ",".join(data.get('sensitiveData', []))
-        readtime = data.get('privacyPolicy', '')
-        familiarpermission = data.get('permissionFamiliarity', '')
-        leakreact = ",".join(data.get('appActions', []))
+        time = data.get('appUsage')
+        app_type = ",".join(data.get('appType'))
+        sensitive = ",".join(data.get('sensitiveData'))
+        readtime = data.get('privacyPolicy')
+        familiarpermission = data.get('permissionFamiliarity')
+        leakreact = ",".join(data.get('appActions'))
 
         # 检查用户是否存在
         user = User.query.filter_by(username=username).first()
@@ -211,7 +206,7 @@ def submit_questions():
             elif answer_value == 4:
                 answer_text = response.get('moreInfo', "Need more information")
             else:
-                answer_text = "No Answer"
+                return jsonify({"success": False, "message": "Please complete your answers."}), 400
 
             # 检查是否已经有相同的记录，如果有则更新
             existing_record = session.query(dynamic_table_class).filter_by(
@@ -232,9 +227,10 @@ def submit_questions():
                     answer=answer_text
                 )
                 session.add(new_record)  # 添加新记录到 session
-
+        
         # 提交事务
         session.commit()
+        
 
         return jsonify({"success": True, "message": "数据提交成功"}), 200
 
