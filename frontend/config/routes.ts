@@ -10,6 +10,7 @@
  * @param icon 配置路由的图标，取值参考 https://ant.design/components/icon-cn， 注意去除风格后缀和大小写，如想要配置图标为 <StepBackwardOutlined /> 则取值应为 stepBackward 或 StepBackward，如想要配置图标为 <UserOutlined /> 则取值应为 user 或者 User
  * @doc https://umijs.org/docs/guides/routes
  */
+//<LockOutlined />
 export default [
   {
     path: '/user',
@@ -99,12 +100,20 @@ export default [
     ],
   },
 
+  {
+    path: '/categories/business',
+    name: 'Business',    
+    // icon: 'lock',
+    component: './Category_Business',
+  },
+
   // {
   //   name: 'list.table-list',
   //   icon: 'table',
   //   path: '/list',
   //   component: './TableList',
   // },
+
   {
     path: '/',
     redirect: '/welcome',
