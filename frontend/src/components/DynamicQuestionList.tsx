@@ -69,7 +69,7 @@ const DynamicQuestionList: React.FC<DynamicQuestionListProps> = ({
     console.log('提交的内容:', payload);
 
     try {
-      const response = await fetch('http://localhost:8888/api/submit_questions', {
+      const response = await fetch('http://47.253.156.187:8000/api/submit_questions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ const DynamicQuestionList: React.FC<DynamicQuestionListProps> = ({
       }
     } catch (error) {
       console.error('提交错误:', error);
-      message.error('Please complete your answers！');
+      message.error('Opps！Something is wrong...');
     }
   };
 
@@ -109,9 +109,9 @@ const DynamicQuestionList: React.FC<DynamicQuestionListProps> = ({
       <div style={{ marginTop: '40px', textAlign: 'center' }}>
         <Button type="primary" onClick={handleSubmit}>
           Submit
-        </Button>
-      </div>
+        </Button>      
       {complete && <SubmitResult />}
+      </div>
     </>
   );
 };

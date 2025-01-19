@@ -10,6 +10,7 @@
  * @param icon 配置路由的图标，取值参考 https://ant.design/components/icon-cn， 注意去除风格后缀和大小写，如想要配置图标为 <StepBackwardOutlined /> 则取值应为 stepBackward 或 StepBackward，如想要配置图标为 <UserOutlined /> 则取值应为 user 或者 User
  * @doc https://umijs.org/docs/guides/routes
  */
+//<LockOutlined />
 export default [
   {
     path: '/user',
@@ -99,12 +100,105 @@ export default [
     ],
   },
 
+  {
+    path: '/categories/art-and-design',
+    name: 'Art and Design',    
+    icon: 'lock',
+    component: './Category_ArtandDesign',
+  },
+  {
+    path: '/categories/auto-and-vehicles',
+    name: 'Auto and Vehicles',    
+    icon: 'lock',
+    component: './Category_AutoandVehicles',
+  },
+  {
+    path: '/categories/beauty',
+    name: 'Beauty',    
+    icon: 'lock',
+    component: './Category_Beauty',
+  },
+  {
+    path: '/categories/books-and-reference',
+    name: 'Books and Reference',    
+    icon: 'lock',
+    component: './Category_BooksandReference',
+  },
+  {
+    path: '/categories/business',
+    name: 'Business',    
+    icon: 'lock',
+    component: './Category_Business',  
+  },
+  {
+    path: '/categories/communications',
+    name: 'Communications',    
+    icon: 'lock',
+    component: './Category_Communications',
+  },
+  {
+    path: '/categories/dating',
+    name: 'Dating',    
+    icon: 'lock',
+    component: './Category_Dating',
+  },
+  {
+    path: '/categories/education',
+    name: 'Education',    
+    icon: 'lock',
+    component: './Category_Education',
+  },
+  {
+    path: '/categories/entertainment',
+    name: 'Entertainment',    
+    icon: 'lock',
+    component: './Category_Entertainment',
+  },
+  {
+    path: '/categories/finance',
+    name: '......',    
+    icon: 'lock',
+    component: './Category_Finance',
+  },
+  // {
+  //   path: '/categories/food-and-drink',
+  //   name: 'Food and Drink',    
+  //   icon: 'lock',
+  //   component: './Category_FoodandDrink',
+  // },
+  // {
+  //   path: '/categories/health-and-fitness',
+  //   name: 'Health and Fitness',    
+  //   icon: 'lock',
+  //   component: './Category_HealthandFitness',
+  // },
+  // {
+  //   path: '/categories/house-and-home',
+  //   name: 'House and Home',    
+  //   icon: 'lock',
+  //   component: './Category_HouseandHome',
+  // },
+  // {
+  //   path: '/categories/libraries-and-demo',
+  //   name: 'Libraries and Demo',    
+  //   icon: 'lock',
+  //   component: './Category_LibrariesandDemo',
+  // },
+  // {
+  //   path: '/categories/lifestyle',
+  //   name: 'Lifestyle',    
+  //   icon: 'lock',
+  //   component: './Category_Lifestyle',
+  // },
+  
+
   // {
   //   name: 'list.table-list',
   //   icon: 'table',
   //   path: '/list',
   //   component: './TableList',
   // },
+
   {
     path: '/',
     redirect: '/welcome',

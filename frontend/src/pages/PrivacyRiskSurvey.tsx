@@ -57,7 +57,7 @@ const PrivacyRiskSurvey = () => {
   const submitSurvey = async (data: any) => {
     // 实际的请求可以通过 fetch 或 axios 发出
     try {
-      const response = await fetch('http://localhost:8888/api/submit_survey', {
+      const response = await fetch('http://47.253.156.187:8000/api/submit_survey', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

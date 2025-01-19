@@ -1,5 +1,5 @@
 class Config:
-    mysql_host = "mymysql"
+    mysql_host = "172.18.38.30"
     mysql_port = 3306
     mysql_user = "userw"
     mysql_password = "pswdw"
