@@ -95,8 +95,15 @@ const PrivacyRiskSurvey = () => {
         <Form onFinish={onFinish} layout="vertical">
           {/* 1. Background Information */}
           <h2>1. Background Information</h2>
+          <Form.Item
+                name="prolific"
+                label="Prolific ID"
+                rules={[{ required: true, message: 'Please enter your Prolific ID' }]}
+              >
+                <Input type="text" placeholder="Enter your Prolific ID" />
+              </Form.Item>
 
-          <Row gutter={36}>
+          {/* <Row gutter={36}>
             <Col span={8}>
               <Form.Item
                 name="age"
@@ -135,7 +142,7 @@ const PrivacyRiskSurvey = () => {
                 </Select>
               </Form.Item>
             </Col>
-          </Row>
+          </Row> */}
 
           <Row gutter={36}>
             <Col span={12}>
