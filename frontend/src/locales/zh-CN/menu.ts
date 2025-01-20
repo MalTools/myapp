@@ -57,5 +57,22 @@ export default {
   "menu.Tools": "工具",
   "menu.Tools.Tool-Translator": "翻译器",
   "menu.Tools.Tool-Scanner": "扫描器",
-  "menu.Tools.Tool-VPN Proxy": "VPN代理"
+  "menu.Tools.Tool-VPN Proxy": "VPN代理",
+  "menu.Art and Design": "艺术与设计",
+  "menu.Auto and Vehicles": "汽车与交通工具",
+  "menu.Beauty": "美容时尚",
+  "menu.Books and Reference": "图书与工具书",
+  "menu.Business": "商务",
+  "menu.Communications": "通讯",
+  "menu.Dating": "交友",
+  "menu.Education": "教育",
+  "menu.Entertainment": "娱乐",
+  "menu......." : "......",
+  "menu.Tools.Tool-Alarm Clock": "闹钟工具",
+  "menu.Tools.Tool-Audio Recording": "录音工具",
+  "menu.Tools.Tool-Calculator": "计算器",
+  "menu.Tools.Tool-Calendar": "日历",
+  "menu.Tools.Tool-Flashlight": "手电筒",
+  "menu.Tools.......": "......",
+  "menu.Contact": "联系我们"
 };

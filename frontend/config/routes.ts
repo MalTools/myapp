@@ -248,6 +248,7 @@ export default [
     path: '/contact',
     name: 'Contact',
     component: './ContactForm',
+    hideInMenu: true,
   },
   
 ];

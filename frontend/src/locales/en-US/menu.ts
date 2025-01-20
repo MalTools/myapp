@@ -57,5 +57,22 @@ export default {
   "menu.Tools": "Tools",
   "menu.Tools.Tool-Translator": "Translator",
   "menu.Tools.Tool-Scanner": "Scanner",
-  "menu.Tools.Tool-VPN Proxy": "VPN Proxy"
+  "menu.Tools.Tool-VPN Proxy": "VPN Proxy",
+  "menu.Art and Design": "Art and Design",
+  "menu.Auto and Vehicles": "Auto and Vehicles",
+  "menu.Beauty": "Beauty",
+  "menu.Books and Reference": "Books and Reference",
+  "menu.Business": "Business",
+  "menu.Communications": "Communications",
+  "menu.Dating": "Dating",
+  "menu.Education": "Education",
+  "menu.Entertainment": "Entertainment",
+  "menu......." : "......",
+  "menu.Tools.Tool-Alarm Clock": "Alarm Clock",
+  "menu.Tools.Tool-Audio Recording": "Alarm Clock",
+  "menu.Tools.Tool-Calculator": "Calculator",
+  "menu.Tools.Tool-Calendar": "Calendar",
+  "menu.Tools.Tool-Flashlight": "Flashlight",
+  "menu.Tools.......": "......",
+  "menu.Contact": "Contact Us"
 };
