@@ -1,9 +1,9 @@
-import { Button, List, message } from 'antd';
+import { Button, List, message, Modal } from 'antd';
 import React, { useState } from 'react';
 import QuestionItem from './QuestionItem';
 // import Card from 'antd/es/card/Card';
-import { extractTextFromElement } from './utils';
 import SubmitResult from './SubmitResult';
+import { extractTextFromElement } from './utils';
 
 interface Question {
   question: React.ReactNode;
@@ -32,6 +32,13 @@ const DynamicQuestionList: React.FC<DynamicQuestionListProps> = ({
 }) => {
   const [answers, setAnswers] = useState<{ [key: number]: Answer }>({});
   const [complete, setComplete] = useState(false);
+  const handleOk = () => {
+    setComplete(false);
+  };
+
+  const handleCancel = () => {
+    setComplete(false);
+  };
 
   const handleAnswerChange = (index: number, value: Answer) => {
     setAnswers((prev) => ({
@@ -42,7 +49,8 @@ const DynamicQuestionList: React.FC<DynamicQuestionListProps> = ({
 
   const defaultSuccessHandler = () => {
     console.log('Survey was successfully submitted!');
-    message.success('The answers were successfully submitted. Thank you!');
+    message.success('The answers were successfully submitted!');
+    
   };
 
   const handleSubmit = async () => {
@@ -69,7 +77,7 @@ const DynamicQuestionList: React.FC<DynamicQuestionListProps> = ({
     console.log('提交的内容:', payload);
 
     try {
-      const response = await fetch('http://47.253.156.187:8000/api/submit_questions', {
+      const response = await fetch('http://47.253.156.187:5000/api/submit_questions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -108,9 +116,16 @@ const DynamicQuestionList: React.FC<DynamicQuestionListProps> = ({
       />
       <div style={{ marginTop: '40px', textAlign: 'center' }}>
         <Button type="primary" onClick={handleSubmit}>
-          Submit
-        </Button>      
-      {complete && <SubmitResult />}
+          Next
+        </Button>
+        <Modal
+        centered
+        title="Study Complete"
+        open={complete} onOk={handleOk} onCancel={handleCancel}
+      >
+        <SubmitResult />  {/* Your SubmitResult component inside the modal */}
+      </Modal>
+        {/* {complete && <SubmitResult />} */}
       </div>
     </>
   );

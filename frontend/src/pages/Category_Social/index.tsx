@@ -3,7 +3,8 @@ import CategoryKeywords from '@/components/CategoryKeywords';
 import { PageContainer } from '@ant-design/pro-components';
 import { useIntl } from '@umijs/max';
 import { Typography } from 'antd';
-import React, { useState } from 'react';
+import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import App1 from './components/App1';
 import App2 from './components/App2';
 import App3 from './components/App3';
@@ -12,8 +13,28 @@ const { Text } = Typography;
 
 const Social: React.FC = () => {
   const intl = useIntl();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const [activeTabKey, setActiveTabKey] = useState('1'); // 当前激活的 Tab key
+  // Map path to tab key
+  const pathToKey: Record<string, string> = {
+    '/categories/social/app1': '1',
+    '/categories/social/app2': '2',
+    '/categories/social/app3': '3',
+  };
+
+  // Map tab key to path
+  const keyToPath: Record<string, string> = {
+    '1': '/categories/social/app1',
+    '2': '/categories/social/app2',
+    '3': '/categories/social/app3',
+  };
+  const activeTabKey = pathToKey[location.pathname] || '1';
+  const handleTabChange = (key: string) => {
+    navigate(keyToPath[key]); // Navigate to the corresponding path
+  };
+
+  // const [activeTabKey, setActiveTabKey] = useState('1'); // 当前激活的 Tab key
 
   const weatherKeywords = [
     'whatsapp',
@@ -27,7 +48,7 @@ const Social: React.FC = () => {
     'church communicate',
     'faith community',
     'matchmaking service',
-    'residents unit communication'
+    'residents unit communication',
   ];
 
   const renderTabContent = () => {
@@ -98,7 +119,9 @@ const Social: React.FC = () => {
       tabProps={{
         type: 'card',
         tabBarGutter: 4,
-        onChange: (key) => setActiveTabKey(key),
+        // onChange: (key) => setActiveTabKey(key),
+        activeKey: activeTabKey,
+        onChange: handleTabChange,
       }}
     >
       {renderTabContent()} {/* 动态渲染内容 */}

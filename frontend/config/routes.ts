@@ -10,6 +10,9 @@
  * @param icon 配置路由的图标，取值参考 https://ant.design/components/icon-cn， 注意去除风格后缀和大小写，如想要配置图标为 <StepBackwardOutlined /> 则取值应为 stepBackward 或 StepBackward，如想要配置图标为 <UserOutlined /> 则取值应为 user 或者 User
  * @doc https://umijs.org/docs/guides/routes
  */
+
+import component from "@/locales/en-US/component";
+
 //<LockOutlined />
 export default [
   {
@@ -23,6 +26,7 @@ export default [
       },
     ],
   },
+  
   {
     path: '/welcome',
     name: 'welcome',
@@ -59,9 +63,45 @@ export default [
     component: './Category_Weather',
   },
   {
+    name: 'Weather-App1',
+    path: '/categories/weather/app1',
+    component: './Category_Weather',
+    hideInMenu: true,
+  },
+  {
+    name: 'Weather-App2',
+    path: '/categories/weather/app2',
+    component: './Category_Weather',
+    hideInMenu: true,
+  },
+  {
+    name: 'Weather-App3',
+    path: '/categories/weather/app3',
+    component: './Category_Weather',
+    hideInMenu: true,
+  },
+  {
     name: 'Social',
     path: '/categories/social',
     component: './Category_Social',
+  },
+  {
+    name: 'Social-App1',
+    path: '/categories/social/app1',
+    component: './Category_Social',
+    hideInMenu: true,
+  },
+  {
+    name: 'Social-App2',
+    path: '/categories/social/app2',
+    component: './Category_Social',
+    hideInMenu: true,
+  },
+  {
+    name: 'Social-App3',
+    path: '/categories/social/app3',
+    component: './Category_Social',
+    hideInMenu: true,
   },
   {
     name: 'Events',
@@ -69,10 +109,22 @@ export default [
     component: './Category_Events',
   },
   {
-    path: '/categories/comics',
-    name: 'Comics',    
-    component: './Category_Comics',
+    name: 'Events-App1',
+    path: '/categories/events/app1',
+    component: './Category_Events',
+    hideInMenu: true,
   },
+  {
+    name: 'Events-App2',
+    path: '/categories/events/app2',
+    component: './Category_Events',
+    hideInMenu: true,
+  },
+  // {
+  //   path: '/categories/comics',
+  //   name: 'Comics',    
+  //   component: './Category_Comics',
+  // },
   {
     path: '/categories/tools',
     name: 'Tools',
@@ -83,19 +135,49 @@ export default [
         redirect: '/categories/tools/translator-tools',
       },
       {
-        path: '/categories/tools/translator-tools',
         name: 'Tool-Translator',
+        path: '/categories/tools/translator-tools',        
         component: './Category_Tools_Translator',
       },
       {
-        path: '/categories/tools/scanner-tools',
+        name: 'Tool-Translator-App1',
+        path: '/categories/tools/translator-tools/app1',
+        component: './Category_Tools_Translator',
+        hideInMenu: true,
+      },
+      {
+        name: 'Tool-Translator-App2',
+        path: '/categories/tools/translator-tools/app2',
+        component: './Category_Tools_Translator',
+        hideInMenu: true,
+      },
+      {
         name: 'Tool-Scanner',
+        path: '/categories/tools/scanner-tools',
         component: './Category_Tools_Scanner',
       },
       {
-        path: '/categories/tools/vpn-tools',
+        name: 'Tool-Scanner-App1',
+        path: '/categories/tools/scanner-tools/app1',
+        component: './Category_Tools_Scanner',
+        hideInMenu: true,
+      },
+      {
         name: 'Tool-VPN Proxy',
+        path: '/categories/tools/vpn-tools',        
         component: './Category_Tools_VPN',
+      },
+      {
+        name: 'Tool-VPN Proxy-App1',
+        path: '/categories/tools/vpn-tools/app1',
+        component: './Category_Tools_VPN',
+        hideInMenu: true,
+      },
+      {
+        name: 'Tool-VPN Proxy-App2',
+        path: '/categories/tools/vpn-tools/app2',
+        component: './Category_Tools_VPN',
+        hideInMenu: true,
       },
       {
         path: '/categories/tools/alarm-clock',

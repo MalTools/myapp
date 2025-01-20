@@ -2,12 +2,18 @@ import DynamicQuestionList from '@/components/DynamicQuestionList';
 import GuidingResponseTips from '@/components/GuidingResponseTips';
 import { showImageModal } from '@/components/utils';
 import { useModel } from '@umijs/max';
-import { Card, Typography } from 'antd';
+import { Card, Typography, message } from 'antd';
 import React, { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const { Title, Text } = Typography;
 
 const App1: React.FC = () => {
+  const navigate = useNavigate();
+  const handleNext = () => {
+    message.success("Get to VPN Proxy Tools' App 2 now.");
+    navigate('/categories/tools/vpn-tools/app2'); // Navigate to the next tab's path
+  };
   const { initialState } = useModel('@@initialState');
   const currentUser = initialState?.currentUser?.name || 'Anonymous'; // 默认值为 "Anonymous"
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -233,6 +239,7 @@ const App1: React.FC = () => {
           currentUser={currentUser}
           appNumber={1}
           tableName="tools_vpn"
+          onSubmitSuccess={handleNext}
         />
       </Card>
     </div>

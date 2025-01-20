@@ -8,6 +8,7 @@ import defaultSettings from '../config/defaultSettings';
 import { errorConfig } from './requestErrorConfig';
 import { currentUser as queryCurrentUser } from '@/services/ant-design-pro/api';
 import React from 'react';
+import ScrollToTop from './components/ScrollToTop';
 // import ContactForm from './components/ContactForm';
 // const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -105,6 +106,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
       // if (initialState?.loading) return <PageLoading />;
       return (
         <>
+        <ScrollToTop />
           {children}
           {/* {isDev && (
             <SettingDrawer

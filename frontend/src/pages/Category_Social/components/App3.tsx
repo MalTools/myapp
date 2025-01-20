@@ -3,12 +3,19 @@ import GuidingResponseTips from '@/components/GuidingResponseTips';
 import ScrollImages from '@/components/ScrollImages';
 import { showImageModal } from '@/components/utils';
 import { useModel } from '@umijs/max';
-import { Card, Typography } from 'antd';
+import { Card, Typography, message } from 'antd';
 import React, { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const { Title, Text } = Typography;
 
 const App3: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleNext = () => {
+    message.success("Get to Events' App 1 now.");
+    navigate('/categories/events/app1'); // Navigate to the next tab's path
+  };
   const { initialState } = useModel('@@initialState');
   const currentUser = initialState?.currentUser?.name || 'Anonymous'; // 默认值为 "Anonymous"
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -261,6 +268,7 @@ const App3: React.FC = () => {
           currentUser={currentUser}
           appNumber={3}
           tableName="social"
+          onSubmitSuccess={handleNext}
         />
       </Card>
     </div>

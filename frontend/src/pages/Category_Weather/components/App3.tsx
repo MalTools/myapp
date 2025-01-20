@@ -1,13 +1,20 @@
 import DynamicQuestionList from '@/components/DynamicQuestionList';
 import GuidingResponseTips from '@/components/GuidingResponseTips';
 import { useModel } from '@umijs/max';
-import { Card, Tooltip, Typography } from 'antd';
+import { Card, Tooltip, Typography, message } from 'antd';
 import React, { useRef } from 'react';
 import { showImageModal } from '@/components/utils';
+import { useNavigate } from 'react-router-dom';
 
 const { Title, Text } = Typography;
 
 const App3: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleNext = () => {
+    message.success("Get to Social's App 1 now.");
+    navigate('/categories/social/app1'); // Navigate to the next tab's path
+  };
   const { initialState } = useModel('@@initialState');
   const currentUser = initialState?.currentUser?.name || 'Anonymous'; // 默认值为 "Anonymous"
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -267,6 +274,7 @@ const App3: React.FC = () => {
           currentUser={currentUser}
           appNumber={3}
           tableName="weather"
+          onSubmitSuccess={handleNext}
         />
       </Card>
     </div>

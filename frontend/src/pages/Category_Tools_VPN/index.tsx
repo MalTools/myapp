@@ -3,7 +3,8 @@ import CategoryKeywords from '@/components/CategoryKeywords';
 import { PageContainer } from '@ant-design/pro-components';
 import { useIntl } from '@umijs/max';
 import { Typography } from 'antd';
-import React, { useState } from 'react';
+import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import App1 from './components/App1';
 import App2 from './components/App2';
 
@@ -11,20 +12,40 @@ const { Text } = Typography;
 
 const VPN: React.FC = () => {
   const intl = useIntl();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const [activeTabKey, setActiveTabKey] = useState('1'); // 当前激活的 Tab key
+  // Map path to tab key
+  const pathToKey: Record<string, string> = {
+    '/categories/tools/vpn-tools/app1': '1',
+    '/categories/tools/vpn-tools/app2': '2',
+    // '/categories/social/app3': '3',
+  };
+
+  // Map tab key to path
+  const keyToPath: Record<string, string> = {
+    '1': '/categories/tools/vpn-tools/app1',
+    '2': '/categories/tools/vpn-tools/app2',
+    // '3': '/categories/social/app3',
+  };
+  const activeTabKey = pathToKey[location.pathname] || '1';
+  const handleTabChange = (key: string) => {
+    navigate(keyToPath[key]); // Navigate to the corresponding path
+  };
+
+  // const [activeTabKey, setActiveTabKey] = useState('1'); // 当前激活的 Tab key
 
   const weatherKeywords = [
     'fast vpn',
-    'secure vpn', 
-    'vpn service', 
+    'secure vpn',
+    'vpn service',
     'free vpn',
     'global proxy servers',
     'virtual private network',
     'access internet securely',
     'surfing anonymously',
     'encrypted internet',
-    'unblocked websites'
+    'unblocked websites',
   ];
 
   const renderTabContent = () => {
@@ -33,8 +54,8 @@ const VPN: React.FC = () => {
         return <App1 />;
       case '2':
         return <App2 />;
-    //   case '3':
-    //     return <App3 />;
+      //   case '3':
+      //     return <App3 />;
       default:
         return null;
     }
@@ -95,7 +116,9 @@ const VPN: React.FC = () => {
       tabProps={{
         type: 'card',
         tabBarGutter: 4,
-        onChange: (key) => setActiveTabKey(key),
+        // onChange: (key) => setActiveTabKey(key),
+        activeKey: activeTabKey,
+        onChange: handleTabChange,
       }}
     >
       {renderTabContent()} {/* 动态渲染内容 */}
