@@ -97,6 +97,42 @@ export default [
         name: 'Tool-VPN Proxy',
         component: './Category_Tools_VPN',
       },
+      {
+        path: '/categories/tools/alarm-clock',
+        name: 'Tool-Alarm Clock',
+        icon: 'lock',
+        component: './Category_Beauty',
+      },
+      {
+        path: '/categories/tools/audio-recording',
+        name: 'Tool-Audio Recording',
+        icon: 'lock',
+        component: './Category_Beauty',
+      },
+      {
+        path: '/categories/tools/calculator',
+        name: 'Tool-Calculator',
+        icon: 'lock',
+        component: './Category_Beauty',
+      },
+      {
+        path: '/categories/tools/calendar',
+        name: 'Tool-Calendar',
+        icon: 'lock',
+        component: './Category_Beauty',
+      },
+      {
+        path: '/categories/tools/flashlight',
+        name: 'Tool-Flashlight',
+        icon: 'lock',
+        component: './Category_Beauty',
+      },
+      {
+        path: '/categories/tools/lock-screen',
+        name: '......',
+        icon: 'lock',
+        component: './Category_Beauty',
+      },
     ],
   },
 
@@ -144,22 +180,22 @@ export default [
   },
   {
     path: '/categories/education',
-    name: 'Education',    
+    name: '......',    
     icon: 'lock',
     component: './Category_Education',
   },
-  {
-    path: '/categories/entertainment',
-    name: 'Entertainment',    
-    icon: 'lock',
-    component: './Category_Entertainment',
-  },
-  {
-    path: '/categories/finance',
-    name: '......',    
-    icon: 'lock',
-    component: './Category_Finance',
-  },
+  // {
+  //   path: '/categories/entertainment',
+  //   name: 'Entertainment',    
+  //   icon: 'lock',
+  //   component: './Category_Entertainment',
+  // },
+  // {
+  //   path: '/categories/finance',
+  //   name: '......',    
+  //   icon: 'lock',
+  //   component: './Category_Finance',
+  // },
   // {
   //   path: '/categories/food-and-drink',
   //   name: 'Food and Drink',    
@@ -208,4 +244,10 @@ export default [
     layout: false,
     component: './404',
   },
+  {
+    path: '/contact',
+    name: 'Contact',
+    component: './ContactForm',
+  },
+  
 ];
