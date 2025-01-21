@@ -35,13 +35,14 @@ const PrivacyRiskSurvey = () => {
       const surveyData = {
         ...values,
         username: currentUser.username,
-        sensitiveDataOther: values.sensitiveDataOther || null, // 设置为 null，如果未填写
-        appActionsOther: values.appActionsOther || null,
-        privacyOpinion: values.privacyOpinion || null,
+        sensitiveDataOther: values.sensitiveDataOther || 'null', // 设置为 null，如果未填写
+        appActionsOther: values.appActionsOther || 'null',
+        privacyOpinion: values.privacyOpinion || 'null',
       };
 
       // 调用后端接口提交调查问卷数据
       const msg = await submitSurvey(surveyData); // 这是我们调用的后端提交接口
+
       if (msg.status === 'ok') {
         // 成功提示
         const successMessage = 'Successfully submited!';
@@ -62,8 +63,10 @@ const PrivacyRiskSurvey = () => {
   // 模拟的提交调查问卷到后端的函数（替换成实际的请求）
   const submitSurvey = async (data: any) => {
     // 实际的请求可以通过 fetch 或 axios 发出
+    console.log('data', data);
+
     try {
-      const response = await fetch('http://privacyrating.cloud:8000/api/submit_survey', {
+      const response = await fetch('http://47.253.156.187:5000/api/submit_survey', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
