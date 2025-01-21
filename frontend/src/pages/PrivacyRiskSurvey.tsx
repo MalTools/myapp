@@ -26,10 +26,10 @@ const PrivacyRiskSurvey = () => {
   const onFinish = async (values: Record<string, any>) => {
     try {
       // 检查表单字段是否有空值
-      if (Object.values(values).includes('') || Object.values(values).includes(undefined)) {
-        message.error('Please answer all the required questions.');
-        return;
-      }
+      // if (Object.values(values).includes('') || Object.values(values).includes(undefined)) {
+      //   message.error('Please answer all the required questions.');
+      //   return;
+      // }
 
       // 将当前用户的用户名添加到提交的数据中
       const surveyData = { ...values, username: currentUser.username };
