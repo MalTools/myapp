@@ -162,12 +162,12 @@ def submit_survey():
         thoughts = data.get('privacyOpinion')
 
         # 检查用户是否存在
-        user = User.query.filter_by(username=username).first()
+        user = User.query.filter_by(username=user_name).first()
         if not user:
             return jsonify({"success": False, "message": "用户不存在"}), 400
 
         # 检查是否已经存在该用户的调查问卷
-        existing_survey = Survey.query.filter_by(user_name=username).first()
+        existing_survey = Survey.query.filter_by(user_name=user_name).first()
         if existing_survey:
             return jsonify({"success": False, "message": "该用户的问卷已提交"}), 400
 
