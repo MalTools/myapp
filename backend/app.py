@@ -162,9 +162,9 @@ def submit_survey():
         thoughts = data.get('privacyOpinion')
 
         # 检查用户是否存在
-        user = User.query.filter_by(username=user_name).first()
-        if not user:
-            return jsonify({"success": False, "message": "用户不存在"}), 400
+        # user = User.query.filter_by(username=user_name).first()
+        # if not user:
+        #     return jsonify({"success": False, "message": "用户不存在"}), 400
 
         # 检查是否已经存在该用户的调查问卷
         # existing_survey = Survey.query.filter_by(user_name=user_name).first()
@@ -236,12 +236,16 @@ def submit_questions():
 
             # 根据答案数值设置对应描述
             if answer_value == 1:
-                answer_text = "Uncomfortable"
+                answer_text = "Very Uncomfortable"
             elif answer_value == 2:
-                answer_text = "So-so"
+                answer_text = "Uncomfortable"
             elif answer_value == 3:
-                answer_text = "Comfortable"
+                answer_text = "So-so"
             elif answer_value == 4:
+                answer_text = "Comfortable"
+            elif answer_value == 5:
+                answer_text = "Very Comfortable"
+            elif answer_value == 6:
                 answer_text = response.get('moreInfo', "Need more information")
             else:
                 return jsonify({"success": False, "message": "Please complete your answers."}), 400

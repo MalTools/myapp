@@ -195,8 +195,17 @@ const Welcome: React.FC = () => {
             Each app category is organized into a single evaluation page. Use the left navigation
             panel to select a category. At the top of the page, you'll find a set of keywords
             describing the features and functionalities of that app category (see the example
-            below). Each category contains several representative apps, <br></br>shown as tabs (for
-            example, App 1, App 2, App 3).
+            below). Each category contains several representative apps, shown as tabs (for example,
+            App 1, App 2, App 3). <br /> Each app tab provides:
+            <ul>
+              <li>
+                A description of the app with screenshot images, outlining its main features and
+                services.
+              </li>
+              <li>
+                Questions designed to understand your perceptions of the app’s privacy behaviors.
+              </li>
+            </ul>
           </Paragraph>
 
           {/* 添加示例页面截图 */}
@@ -211,73 +220,62 @@ const Welcome: React.FC = () => {
           <Title level={4}>YOUR TASK is:</Title>
           <Paragraph>
             <Text strong style={{ color: '#fa541c' }}>
-              1. Explore the Tabs:
+              1. Start with the Survey Section:
             </Text>{' '}
-            Each app tab provides:
+            Begin by navigating to the{' '}
+            <strong>
+              <a href="/Survey">Survey</a>
+            </strong>{' '}
+            section in the left navigation panel. This survey gathers additional insights into your
+            preferences, behaviors, and attitudes related to mobile app privacy and data sharing.
+            After completing the survey, click the bottom "
+            <strong>Submit this survey and Start the follow-up privacy evaluations</strong>" button
+            to proceed to various app categories for privacy evaluation.
           </Paragraph>
-          <ul>
-            <li>
-              A description of the app with screenshot images, outlining its main features and
-              services.
-            </li>
-            <li>
-              Questions designed to understand your perceptions of the app’s privacy behaviors.
-            </li>
-          </ul>
 
           <Paragraph>
             <Text strong style={{ color: '#fa541c' }}>
-              2. Complete the Questions:
-            </Text>{' '}
-            Please <strong>answer all the questions for each app tab in the category</strong>.
-            Completing all tabs means you’ve finished evaluating that category.
-            <ul>
-              <li>
-                <strong>Goal:</strong> Evaluate{' '}
-                <Text strong style={{ color: 'blue' }}>
-                  at least 3 categories
-                </Text>{' '}
-                from the left navigation panel.
-              </li>
-            </ul>
-          </Paragraph>
-
-          {/* 每个问题的说明 */}
-          <Paragraph>
-            <Text strong style={{ color: '#fa541c' }}>
-              3. Rate Each Scenario:
-            </Text>{' '}
+              2. Complete the Questions:{' '}
+            </Text>
+            After the survey, you will start with the <strong>Weather - App 1 Tab</strong> and
+            proceed through each tab by clicking <strong>Next</strong> until you reach the end App
+            Tab. <br />
             For each question, you’ll review a specific scenario where the app accesses certain data
             (e.g., location or microphone) for a stated purpose. Use the following scale to rate
             your comfort level:
-          </Paragraph>
-          <ul>
-            <li>
-              <FrownOutlined style={{ color: 'red', marginRight: 6 }} />
-              <Text strong>Uncomfortable:</Text> You feel opposed to the described behavior.
-            </li>
-            <li>
-              <MehOutlined style={{ color: 'orange', marginRight: 6 }} />
-              <Text strong>So-so:</Text> You feel neutral or have minor concerns about the described
-              behavior.
-            </li>
-            <li>
-              <SmileOutlined style={{ color: 'green', marginRight: 6 }} />
-              <Text strong>Comfortable:</Text> You feel completely fine with the described behavior.
-            </li>
-            <li>
-              <Text strong>Need more information:</Text> You cannot make a decision without
-              additional details.
-            </li>
-          </ul>
-
-          <Paragraph>
-            <Text strong style={{ color: '#fa541c' }}>
-              4. Complete the Follow-Up Survey:
-            </Text>{' '}
-            Please don't forget to proceed to the <strong>Survey</strong> section in the left navigation panel.
-            This survey gathers additional insights into your preferences, behaviors, and attitudes
-            related to mobile app privacy and data sharing. Thank you!
+            <ul>
+              <li>
+                <FrownOutlined style={{ color: 'red', marginRight: 6 }} />
+                <Text strong>Very Uncomfortable:</Text> You feel strongly opposed to the described
+                behavior.
+              </li>
+              <li>
+                <FrownOutlined style={{ color: 'HotPink', marginRight: 6 }} />
+                <Text strong>Uncomfortable:</Text> You feel somewhat opposed or uneasy about the
+                behavior.
+              </li>
+              <li>
+                <MehOutlined style={{ color: 'orange', marginRight: 6 }} />
+                <Text strong>So-so:</Text> You feel neutral or have minor concerns about the
+                described behavior.
+              </li>
+              <li>
+                <SmileOutlined style={{ color: 'MediumAquamarine', marginRight: 6 }} />
+                <Text strong>Comfortable:</Text> You feel at ease with the described behavior.
+              </li>
+              <li>
+                <SmileOutlined style={{ color: 'green', marginRight: 6 }} />
+                <Text strong>Very Comfortable:</Text> You feel fully supportive or strongly aligned
+                with the described behavior.
+              </li>
+              <li>
+                <Text strong>Need more information:</Text> You cannot make a decision without
+                additional details.
+              </li>
+            </ul>
+            Once you have completed all the questions, a pop-up will confirm that you’ve finished
+            the evaluation.{' '}
+            <strong>Please read the pop-up carefully to copy and paste the Completion Code!</strong>
           </Paragraph>
 
           {/* 鼓励用户参与 */}
@@ -285,7 +283,7 @@ const Welcome: React.FC = () => {
           <ul>
             <li>
               There is <strong>NO RIGHT or WRONG answer.</strong> Please respond based on your
-              personal feelings and perspectives. 
+              personal feelings and perspectives.
             </li>
             <li>
               Your feedback is <strong>anonymous</strong> and critical to improving app privacy
@@ -310,8 +308,11 @@ const Welcome: React.FC = () => {
             fontSize: '16px',
           }}
         >
-          Click on each category in the <Text strong>Left Navigation Panel</Text> to begin your
-          review and share your valuable insights!
+          Click on{' '}
+          <strong>
+            <a href="/Survey">Survey</a>
+          </strong>{' '}
+          to begin your review and share your valuable insights!
         </Paragraph>
       </div>
     </Card>

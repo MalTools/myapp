@@ -1,11 +1,19 @@
 import { Button, Card, Checkbox, Col, Form, Input, message, Radio, Row, Select } from 'antd';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const { Option } = Select;
 
 const PrivacyRiskSurvey = () => {
   const [currentUser, setCurrentUser] = useState<any>({ username: '' });
   const [, setUserSurveyState] = useState<any>({ status: '', type: '' });
+
+  const navigate = useNavigate();
+
+  const handleSubmitSuccess = () => {
+    message.success("Get to Weather's App 1 now.");
+    navigate('/categories/weather/app1'); // Navigate to the next tab's path
+  };
 
   // 模拟获取当前用户（实际项目中可以从上下文、redux或API中获取）
   useEffect(() => {
@@ -66,7 +74,7 @@ const PrivacyRiskSurvey = () => {
     console.log('data', data);
 
     try {
-      const response = await fetch('http://47.253.156.187:5000/api/submit_survey', {
+      const response = await fetch('http://privacyrating.cloud:8000/api/submit_survey', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -75,6 +83,7 @@ const PrivacyRiskSurvey = () => {
       });
 
       if (response.ok) {
+        handleSubmitSuccess();
         return { status: 'ok' }; // 模拟成功响应
       } else {
         const errorData = await response.json();
@@ -333,8 +342,8 @@ const PrivacyRiskSurvey = () => {
 
           {/* Submit Button */}
           <Form.Item>
-            <Button type="primary" htmlType="submit">
-              Submit Survey
+            <Button type="primary" htmlType="submit" onClick={submitSurvey}>
+              Submit this survey and Start the follow-up privacy evaluations
             </Button>
           </Form.Item>
         </Form>

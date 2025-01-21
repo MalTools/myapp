@@ -21,7 +21,7 @@ const QuestionItem: React.FC<QuestionItemProps> = ({ question, description, inde
     setValue(selectedValue);
 
     // 如果选择了 "Need more information to assess"，显示输入框
-    if (selectedValue === 4) {
+    if (selectedValue === 6) {
       setNeedMoreInfo(true);
     } else {
       setNeedMoreInfo(false);
@@ -54,17 +54,25 @@ const QuestionItem: React.FC<QuestionItemProps> = ({ question, description, inde
       >
         <Radio value={1}>
           <FrownOutlined style={{ color: "red", marginRight: 6 }} />
-          Uncomfortable
+          Very Uncomfortable
         </Radio>
         <Radio value={2}>
+          <FrownOutlined style={{ color: "HotPink", marginRight: 6 }} />
+          Uncomfortable
+        </Radio>
+        <Radio value={3}>
           <MehOutlined style={{ color: "orange", marginRight: 6 }} />
           So-so
         </Radio>
-        <Radio value={3}>
-          <SmileOutlined style={{ color: "green", marginRight: 6 }} />
+        <Radio value={4}>
+          <SmileOutlined style={{ color: "MediumAquamarine", marginRight: 6 }} />
           Comfortable
         </Radio>
-        <Radio value={4}>Need more information to assess</Radio>
+        <Radio value={5}>
+          <SmileOutlined style={{ color: "green", marginRight: 6 }} />
+          Very Comfortable
+        </Radio>
+        <Radio value={6}>Need more information to assess</Radio>
       </Radio.Group>
 
       {/* 额外信息输入框 */}
