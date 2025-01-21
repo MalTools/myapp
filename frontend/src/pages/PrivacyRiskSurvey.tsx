@@ -15,7 +15,7 @@ const PrivacyRiskSurvey = () => {
         const data = await response.json();
         setCurrentUser({ username: data.username });
       } else {
-        message.error('无法获取当前用户信息');
+        message.error('Cannot get the current user...');
       }
     };
 
@@ -27,7 +27,7 @@ const PrivacyRiskSurvey = () => {
     try {
       // 检查表单字段是否有空值
       if (Object.values(values).includes('') || Object.values(values).includes(undefined)) {
-        message.error('请填写所有必填项');
+        message.error('Please answer all the required questions.');
         return;
       }
 
@@ -38,18 +38,18 @@ const PrivacyRiskSurvey = () => {
       const msg = await submitSurvey(surveyData); // 这是我们调用的后端提交接口
       if (msg.status === 'ok') {
         // 成功提示
-        const successMessage = '调查问卷提交成功！';
+        const successMessage = 'Successfully submited!';
         message.success(successMessage);
         setUserSurveyState({ status: 'ok', type: 'survey' });
       } else {
         console.log(msg);
         // 如果失败，展示错误信息并更新状态
         setUserSurveyState(msg);
-        message.error('提交失败，请稍后再试');
+        message.error('Failed. Please try again later.');
       }
     } catch (error) {
       console.log(error);
-      message.error('提交调查问卷时发生错误');
+      message.error('Opps! Something is wrong when submitting the survey...');
     }
   };
 
@@ -57,7 +57,7 @@ const PrivacyRiskSurvey = () => {
   const submitSurvey = async (data: any) => {
     // 实际的请求可以通过 fetch 或 axios 发出
     try {
-      const response = await fetch('http://47.253.156.187:8000/api/submit_survey', {
+      const response = await fetch('http://privacyrating.cloud:8000/api/submit_survey', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -82,12 +82,6 @@ const PrivacyRiskSurvey = () => {
       style={{
         borderRadius: 8,
       }}
-      // bodyStyle={{
-      //   backgroundImage:
-      //     initialState?.settings?.navTheme === 'realDark'
-      //       ? 'background-image: linear-gradient(75deg, #1A1B1F 0%, #191C1F 100%)'
-      //       : 'background-image: linear-gradient(75deg, #FBFDFF 0%, #F5F7FF 100%)',
-      // }}
     >
       <div style={{ padding: '20px' }}>
         <h1>Survey on Risk Preference</h1>
@@ -95,13 +89,6 @@ const PrivacyRiskSurvey = () => {
         <Form onFinish={onFinish} layout="vertical">
           {/* 1. Background Information */}
           <h2>1. Background Information</h2>
-          <Form.Item
-                name="prolific"
-                label="Prolific ID"
-                rules={[{ required: true, message: 'Please enter your Prolific ID' }]}
-              >
-                <Input type="text" placeholder="Enter your Prolific ID" />
-              </Form.Item>
 
           {/* <Row gutter={36}>
             <Col span={8}>
@@ -147,14 +134,11 @@ const PrivacyRiskSurvey = () => {
           <Row gutter={36}>
             <Col span={12}>
               <Form.Item
-                name="techBackground"
-                label="Are you familiar with mobile app permission management?"
-                rules={[{ required: true, message: 'Please answer this question' }]}
+                name="prolific"
+                label="Prolific ID"
+                rules={[{ required: true, message: 'Please enter your Prolific ID' }]}
               >
-                <Radio.Group>
-                  <Radio value="yes">Yes</Radio>
-                  <Radio value="no">No</Radio>
-                </Radio.Group>
+                <Input type="text" placeholder="Enter your Prolific ID" />
               </Form.Item>
             </Col>
 
@@ -265,62 +249,54 @@ const PrivacyRiskSurvey = () => {
           {/* 3. Risk Attitude Test */}
           <h2>3. Risk Attitude Test</h2>
 
-          <p>
+          {/* <p>
             You are using a mobile payment app. The app collects your private data (e.g., location,
             purchase records) to provide personalized services, which may affect your monetary gains
             or losses in certain scenarios. Below are specific situations; please select your
             preferred option for each.
-          </p>
+          </p> */}
 
           <Form.Item
-            name="highProbabilityGain"
-            label="If you allow the app to collect your personal data (e.g., location and purchase records):"
+            name="question1"
+            label="1. You participated in a lottery. Which option would you choose?"
             rules={[{ required: true, message: 'Please select an option' }]}
           >
             <Radio.Group>
-              <Radio value="A">A. Get $90 cashback guaranteed</Radio>
-              <Radio value="B">B. 90% chance to get $100, 10% chance to get $0</Radio>
-              <Radio value="C">C. Do not share location data, no cashback</Radio>
+              <Radio value="A">A. Guaranteed $90 reward</Radio>
+              <Radio value="B">B. 95% chance to win $100, 5% chance to win nothing</Radio>
             </Radio.Group>
           </Form.Item>
 
           <Form.Item
-            name="lowProbabilityGain"
-            label="If you allow the app to collect your personal data (e.g., location and purchase records):"
+            name="question2"
+            label="2. You participated in a lucky draw. Which option would you choose?"
             rules={[{ required: true, message: 'Please select an option' }]}
           >
             <Radio.Group>
-              <Radio value="A">A. Guaranteed $5 cashback</Radio>
-              <Radio value="B">B. 5% chance of $100, 95% chance of $0</Radio>
-              <Radio value="C">C. Do not share purchase data, no cashback</Radio>
+              <Radio value="A">A. Guaranteed $5 reward</Radio>
+              <Radio value="B">B. 5% chance to win $100, 95% chance to win nothing</Radio>
             </Radio.Group>
           </Form.Item>
 
           <Form.Item
-            name="highProbabilityLoss"
-            label="If you allow the app to collect your private data (e.g., location and purchase records), your private data might be used by advertisers:"
+            name="question3"
+            label="3. You need to pay a fee to participate in a game. Which option would you choose?"
             rules={[{ required: true, message: 'Please select an option' }]}
           >
             <Radio.Group>
-              <Radio value="A">A. Tolerate some data leakage with ads</Radio>
-              <Radio value="B">
-                B. 90% chance of data leakage with ads, 10% chance of no impact
-              </Radio>
-              <Radio value="C">C. Do not allow data collection, stop using the app</Radio>
+              <Radio value="A">A. Pay $90 for sure</Radio>
+              <Radio value="B">B. 95% chance to pay $100, 5% chance to pay nothing</Radio>
             </Radio.Group>
           </Form.Item>
 
           <Form.Item
-            name="lowProbabilityLoss"
-            label="If you allow the app to collect your private data (e.g., location and purchase records), your private data might be used by advertisers:"
+            name="question4"
+            label="4. You were told you might need to pay a fine. Which option would you choose?"
             rules={[{ required: true, message: 'Please select an option' }]}
           >
             <Radio.Group>
-              <Radio value="A">A. Tolerate a little data leakage with ads</Radio>
-              <Radio value="B">
-                B. 5% chance of data leakage with ads, 95% chance of no impact
-              </Radio>
-              <Radio value="C">C. Do not allow data collection, stop using the app</Radio>
+              <Radio value="A">A. Pay $5 for sure</Radio>
+              <Radio value="B">B. 5% chance to pay $100, 95% chance to pay nothing</Radio>
             </Radio.Group>
           </Form.Item>
 
@@ -336,8 +312,14 @@ const PrivacyRiskSurvey = () => {
             </Radio.Group>
           </Form.Item>
 
-          <Form.Item name="privacyOpinion" label="What are your thoughts on mobile privacy protection?">
-            <Input.TextArea placeholder="e.g., How do you balance privacy protection and convenience?" />
+          <Form.Item
+            name="privacyOpinion"
+            label="What are your thoughts on mobile privacy protection?"
+          >
+            <Input.TextArea
+              placeholder="e.g., How do you balance privacy protection and convenience?"
+              maxLength={200}
+            />
           </Form.Item>
 
           {/* Submit Button */}

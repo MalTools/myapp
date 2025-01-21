@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import React, { useState } from 'react';
 
 const ContactForm: React.FC = () => {
@@ -9,17 +10,34 @@ const ContactForm: React.FC = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // Process the message here (e.g., send to an API)
     console.log('Message received:', formData);
 
-    // Display submission confirmation
-    setIsSubmitted(true);
+    try {
+      // Send data to backend API
+      const response = await fetch('http://privacyrating.cloud:8000/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-    // Clear the form (optional)
-    setFormData({ name: '', email: '', message: '' });
+      if (response.ok) {
+        console.log('Message successfully sent!');       
+        setIsSubmitted(true); // Show success message
+        setFormData({ name: '', email: '', message: '' }); // Clear form
+      } else {
+        console.error('Failed to send message.');
+        message.error('Failed. Please try again later.');
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+      message.error('Something is wrong... Failed to send message.');
+    }
   };
 
   return (

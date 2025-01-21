@@ -1,7 +1,7 @@
 from flask import Flask, request
 from flask_migrate import Migrate
 from sqlalchemy.orm import sessionmaker
-from models import db, User, Survey, get_or_create_table
+from models import db, User, Survey, Contact, get_or_create_table
 from flask_cors import CORS
 from config import Config
 from flask import jsonify
@@ -110,6 +110,30 @@ def get_current_user():
         return jsonify({"error": "User not authenticated"}), 401
 
 
+@app.route('/api/contact', methods=['POST'])
+def submit_contact():
+    data = request.json  # 获取前端提交的数据
+    print(f"接收到的数据: {data}")
+    try:
+        name=data.get('name')
+        email=data.get('email')
+        message=data.get('message')
+
+        contact = Contact(
+            name=name,
+            email=email,
+            message=message
+        )
+        db.session.add(contact)  # 添加到会话
+        db.session.commit()  # 提交事务
+
+        return jsonify({"success": True, "message": "问卷提交成功"}), 200
+    except Exception as e:
+        db.session.rollback()  # 如果出错，回滚事务
+        print(f"数据库错误: {e}")
+        return jsonify({"success": False, "message": "服务器错误"}), 500
+
+
 @app.route('/api/submit_survey', methods=['POST'])
 def submit_survey():
     data = request.json  # 获取前端提交的数据
@@ -117,17 +141,25 @@ def submit_survey():
 
     try:
         # 获取前端传递的数据
-        username = data.get('username')
-        age = int(data.get('age'))
-        gender = data.get('gender')
-        education = data.get('education')
-        familiar = data.get('techBackground') == 'yes'  # 将 'yes' 转换为 True，'no' 转换为 False
-        time = data.get('appUsage')
-        app_type = ",".join(data.get('appType'))
-        sensitive = ",".join(data.get('sensitiveData'))
-        readtime = data.get('privacyPolicy')
-        familiarpermission = data.get('permissionFamiliarity')
-        leakreact = ",".join(data.get('appActions'))
+        user_name = data.get('username')
+        # age = int(data.get('age'))
+        # gender = data.get('gender')
+        # education = data.get('education')
+        prolific_id = data.get('prolific')
+        daily_time_spent = data.get('appUsage')
+        frequently_use_type = ",".join(data.get('appType'))
+        sensitive_type = ",".join(data.get('sensitiveData'))
+        sensitive_type_other = ",".join(data.get('sensitiveDataOther'))
+        read_policy = data.get('privacyPolicy')
+        familiar_with_perm = data.get('permissionFamiliarity')
+        leak_actions = ",".join(data.get('appActions'))
+        leak_actions_other = ",".join(data.get('appActionsOther'))
+        risk_attitude_1 = data.get('question1')
+        risk_attitude_2 = data.get('question2')
+        risk_attitude_3 = data.get('question3')
+        risk_attitude_4 = data.get('question4')
+        prefer_type = data.get('appPreference')
+        thoughts = data.get('privacyOpinion')
 
         # 检查用户是否存在
         user = User.query.filter_by(username=username).first()
@@ -141,17 +173,22 @@ def submit_survey():
 
         # 创建新的调查记录
         survey = Survey(
-            user_name=username,
-            age=age,
-            gender=gender,
-            education=education,
-            familiar=familiar,  # 已正确转换
-            time=time,
-            type=app_type,
-            sensitive=sensitive,
-            readtime=readtime,
-            familiarpermission=familiarpermission,
-            leakreact=leakreact,
+            user_name=user_name,
+            prolific_id=prolific_id,  # 已正确转换
+            daily_time_spent=daily_time_spent,
+            frequently_use_type=frequently_use_type,
+            sensitive_type=sensitive_type,
+            sensitive_type_other=sensitive_type_other,
+            read_policy=read_policy,
+            familiar_with_perm=familiar_with_perm,
+            leak_actions=leak_actions,
+            leak_actions_other=leak_actions_other,
+            risk_attitude_1=risk_attitude_1,
+            risk_attitude_2=risk_attitude_2,
+            risk_attitude_3=risk_attitude_3,
+            risk_attitude_4=risk_attitude_4,
+            prefer_type=prefer_type,
+            thoughts=thoughts
         )
         db.session.add(survey)  # 添加到会话
         db.session.commit()  # 提交事务
@@ -162,6 +199,7 @@ def submit_survey():
         db.session.rollback()  # 如果出错，回滚事务
         print(f"数据库错误: {e}")
         return jsonify({"success": False, "message": "服务器错误"}), 500
+
 
 @app.route('/api/submit_questions', methods=['POST'])
 def submit_questions():

@@ -30,19 +30,37 @@ class User(UserMixin, db.Model):
 class Survey(db.Model):
     __tablename__ = 'surveys'
     user_name = db.Column(db.String(80), primary_key=True)
-    age = db.Column(db.Integer, nullable=False)
-    gender = db.Column(db.String(100), nullable=False)
-    education = db.Column(db.String(100), nullable=False)
-    familiar = db.Column(db.Boolean, nullable=False)
-    time = db.Column(db.String(100), nullable=False)
-    type = db.Column(db.String(100), nullable=False)
-    sensitive = db.Column(db.String(100), nullable=False)
-    readtime = db.Column(db.String(100), nullable=False)
-    familiarpermission = db.Column(db.String(100), nullable=False)
-    leakreact = db.Column(db.String(100), nullable=False)
+    # age = db.Column(db.Integer, nullable=False)
+    # gender = db.Column(db.String(100), nullable=False)
+    # education = db.Column(db.String(100), nullable=False)
+    prolific_id = db.Column(db.String(100), nullable=False)
+    daily_time_spent = db.Column(db.String(100), nullable=False)
+    frequently_use_type = db.Column(db.String(100), nullable=False)
+    sensitive_type = db.Column(db.String(100), nullable=False)
+    sensitive_type_other = db.Column(db.String(100), nullable=True)
+    read_policy = db.Column(db.String(100), nullable=False)
+    familiar_with_perm = db.Column(db.String(100), nullable=False)
+    leak_actions = db.Column(db.String(100), nullable=False)
+    leak_actions_other = db.Column(db.String(100), nullable=True)
+    risk_attitude_1 = db.Column(db.String(100), nullable=False)
+    risk_attitude_2 = db.Column(db.String(100), nullable=False)
+    risk_attitude_3 = db.Column(db.String(100), nullable=False)
+    risk_attitude_4 = db.Column(db.String(100), nullable=False)
+    prefer_type = db.Column(db.String(100), nullable=False)
+    thoughts = db.Column(db.String(200), nullable=True)
 
     def __repr__(self):
         return f'<Survey for {self.user_name}>'
+
+class Contact(db.Model):
+    __tablename__ = 'contact'
+    # user_name = db.Column(db.String(80), primary_key=True)
+    name = db.Column(db.String(80), nullable=True)
+    email = db.Column(db.String(80), nullable=True)
+    message = db.Column(db.String(500), nullable=True)
+
+    def __repr__(self):
+        return f'<Contact from {self.name}>'
 
 
 Base = declarative_base()
