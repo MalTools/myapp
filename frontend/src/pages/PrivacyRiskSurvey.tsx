@@ -32,7 +32,13 @@ const PrivacyRiskSurvey = () => {
       // }
 
       // 将当前用户的用户名添加到提交的数据中
-      const surveyData = { ...values, username: currentUser.username };
+      const surveyData = {
+        ...values,
+        username: currentUser.username,
+        sensitiveDataOther: values.sensitiveDataOther || null, // 设置为 null，如果未填写
+        appActionsOther: values.appActionsOther || null,
+        privacyOpinion: values.privacyOpinion || null,
+      };
 
       // 调用后端接口提交调查问卷数据
       const msg = await submitSurvey(surveyData); // 这是我们调用的后端提交接口

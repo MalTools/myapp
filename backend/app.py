@@ -167,14 +167,14 @@ def submit_survey():
             return jsonify({"success": False, "message": "用户不存在"}), 400
 
         # 检查是否已经存在该用户的调查问卷
-        existing_survey = Survey.query.filter_by(user_name=user_name).first()
-        if existing_survey:
-            return jsonify({"success": False, "message": "该用户的问卷已提交"}), 400
+        # existing_survey = Survey.query.filter_by(user_name=user_name).first()
+        # if existing_survey:
+        #     return jsonify({"success": False, "message": "该用户的问卷已提交"}), 400
 
         # 创建新的调查记录
         survey = Survey(
             user_name=user_name,
-            prolific_id=prolific_id,  # 已正确转换
+            prolific_id=prolific_id,  
             daily_time_spent=daily_time_spent,
             frequently_use_type=frequently_use_type,
             sensitive_type=sensitive_type,
