@@ -19,7 +19,7 @@ const SubmitResult: React.FC = () => (
         <HeartTwoTone twoToneColor="#eb2f96" />
         <br />
         <Text>
-          <a href="https://www.prolific.co/" target="_blank" rel="noopener noreferrer">
+          <a href="https://app.prolific.com/submissions/complete?cc=CC3F9W3U" target="_blank" rel="noopener noreferrer">
             https://www.prolific.co/
           </a>{' '}
           <br />

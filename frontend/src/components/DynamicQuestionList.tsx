@@ -1,13 +1,14 @@
 import { Button, List, message, Modal } from 'antd';
 import React, { useState } from 'react';
 import QuestionItem from './QuestionItem';
+import QuestionItemAttention from './QuestionItemAttention';
 // import Card from 'antd/es/card/Card';
 import SubmitResult from './SubmitResult';
 import { extractTextFromElement } from './utils';
 
 interface Question {
-  question: React.ReactNode;
-  description: React.ReactNode;
+  question: React.ReactNode | string;
+  description: React.ReactNode | string;
 }
 
 interface Answer {
@@ -77,7 +78,7 @@ const DynamicQuestionList: React.FC<DynamicQuestionListProps> = ({
     console.log('提交的内容:', payload);
 
     try {
-      const response = await fetch('http://47.253.156.187:5000/api/submit_questions', {
+      const response = await fetch('http://privacyrating.cloud:8000/api/submit_questions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -105,14 +106,38 @@ const DynamicQuestionList: React.FC<DynamicQuestionListProps> = ({
         bordered
         itemLayout="vertical"
         dataSource={questions}
-        renderItem={(question, index) => (
-          <QuestionItem
-            question={question.question}
-            description={question.description}
-            index={index}
-            onAnswerChange={handleAnswerChange}
-          />
-        )}
+        renderItem={(question, index) => {
+          // Check the type of `question`
+          if (typeof question.question === 'string') {
+            // If the type is a string, render <QuestionItemAttention>
+            return (
+              <QuestionItemAttention
+                question={question.question}
+                // description={question.description}
+                index={index}
+                onAnswerChange={handleAnswerChange}
+              />
+            );
+          } else {
+            // Otherwise, render <QuestionItem>
+            return (
+              <QuestionItem
+                question={question.question}
+                description={question.description}
+                index={index}
+                onAnswerChange={handleAnswerChange}
+              />
+            );
+          }
+        }}
+        // (
+        //   <QuestionItem
+        //     question={question.question}
+        //     description={question.description}
+        //     index={index}
+        //     onAnswerChange={handleAnswerChange}
+        //   />
+        // )}
       />
       <div style={{ marginTop: '40px', textAlign: 'center' }}>
         <Button type="primary" onClick={handleSubmit}>
