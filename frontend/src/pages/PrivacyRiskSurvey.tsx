@@ -189,15 +189,15 @@ const PrivacyRiskSurvey = () => {
               <Checkbox value="bank">Bank Transaction Data</Checkbox>
               <Checkbox value="photo">Photos</Checkbox>
             </Checkbox.Group>
-
-            <Form.Item
-              name="sensitiveDataOther"
-              label="Other sensitive data types (if any):"
-              style={{ marginTop: '10px', marginBottom: '0' }}
-            >
-              <Input placeholder="Please specify other sensitive data types..." />
-            </Form.Item>
           </Form.Item>
+          <Form.Item
+            name="sensitiveDataOther"
+            label="Other sensitive data types (if any):"
+            style={{ marginTop: '10px', marginBottom: '0' }}
+          >
+            <Input placeholder="Please specify other sensitive data types..." />
+          </Form.Item>
+          <br></br>
 
           <h3>B. Awareness of Privacy Rights</h3>
           <Form.Item
@@ -236,15 +236,15 @@ const PrivacyRiskSurvey = () => {
               <Checkbox value="restrict">Continue using but restrict permissions</Checkbox>
               <Checkbox value="report">Contact the developer or relevant authorities</Checkbox>
             </Checkbox.Group>
-
-            <Form.Item
-              name="appActionsOther"
-              label="Other actions you might take (if any):"
-              style={{ marginTop: '10px', marginBottom: '0' }}
-            >
-              <Input placeholder="Please specify other actions..." />
-            </Form.Item>
           </Form.Item>
+          <Form.Item
+            name="appActionsOther"
+            label="Other actions you might take (if any):"
+            style={{ marginTop: '10px', marginBottom: '0' }}
+          >
+            <Input placeholder="Please specify other actions..." />
+          </Form.Item>
+          <br></br>
 
           {/* 3. Risk Attitude Test */}
           <h2>3. Risk Attitude Test</h2>
