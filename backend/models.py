@@ -54,7 +54,7 @@ class Survey(db.Model):
 
 class Contact(db.Model):
     __tablename__ = 'contact'
-    # user_name = db.Column(db.String(80), primary_key=True)
+    user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(80), nullable=True)
     email = db.Column(db.String(80), nullable=True)
     message = db.Column(db.String(500), nullable=True)
