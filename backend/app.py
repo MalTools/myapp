@@ -149,11 +149,11 @@ def submit_survey():
         daily_time_spent = data.get('appUsage')
         frequently_use_type = ",".join(data.get('appType'))
         sensitive_type = ",".join(data.get('sensitiveData'))
-        sensitive_type_other = ",".join(data.get('sensitiveDataOther'))
+        sensitive_type_other = data.get('sensitiveDataOther')
         read_policy = data.get('privacyPolicy')
         familiar_with_perm = data.get('permissionFamiliarity')
         leak_actions = ",".join(data.get('appActions'))
-        leak_actions_other = ",".join(data.get('appActionsOther'))
+        leak_actions_other = data.get('appActionsOther')
         risk_attitude_1 = data.get('question1')
         risk_attitude_2 = data.get('question2')
         risk_attitude_3 = data.get('question3')
@@ -198,7 +198,7 @@ def submit_survey():
     except Exception as e:
         db.session.rollback()  # 如果出错，回滚事务
         print(f"数据库错误: {e}")
-        return jsonify({"success": False, "message": "服务器错误"}), 500
+        return jsonify({"success": False, "message": "数据库错误", "Exception": e}), 500
 
 
 @app.route('/api/submit_questions', methods=['POST'])
