@@ -54,7 +54,7 @@ const PrivacyRiskSurvey = () => {
       if (msg.status === 'ok') {
         // 成功提示
         const successMessage = 'Successfully submited!';
-        message.success(successMessage);
+        // message.success(successMessage);
         setUserSurveyState({ status: 'ok', type: 'survey' });
       } else {
         console.log(msg);

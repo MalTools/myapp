@@ -106,7 +106,8 @@ const DynamicQuestionList: React.FC<DynamicQuestionListProps> = ({
         bordered
         itemLayout="vertical"
         dataSource={questions}
-        renderItem={(question, index) => {
+        renderItem={(question, index) => 
+          {
           // Check the type of `question`
           if (typeof question.question === 'string') {
             // If the type is a string, render <QuestionItemAttention>

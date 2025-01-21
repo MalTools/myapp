@@ -20,7 +20,7 @@ const SubmitResult: React.FC = () => (
         <br />
         <Text>
           <a href="https://app.prolific.com/submissions/complete?cc=CC3F9W3U" target="_blank" rel="noopener noreferrer">
-            https://www.prolific.co/
+          https://app.prolific.com/submissions/complete?cc=CC3F9W3U
           </a>{' '}
           <br />
           Completion code: <strong>CC3F9W3U</strong> <br />

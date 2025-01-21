@@ -117,6 +117,10 @@ const App1: React.FC = () => {
         </Text>
       ),
     },
+    {
+      question: "What category do you think this app should belong to?",
+      description: " "
+    }
   ];
 
   return (
