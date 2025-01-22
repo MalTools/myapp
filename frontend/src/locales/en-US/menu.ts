@@ -74,5 +74,18 @@ export default {
   "menu.Tools.Tool-Calendar": "Calendar",
   "menu.Tools.Tool-Flashlight": "Flashlight",
   "menu.Tools.......": "......",
-  "menu.Contact": "Contact Us"
+  "menu.Contact": "Contact Us",
+  "menu.Weather-App1": "Weather-App1",
+  "menu.Weather-App2": "Weather-App2",
+  "menu.Weather-App3": "Weather-App3",
+  "menu.Social-App1": "Social-App1",
+  "menu.Social-App2": "Social-App2",
+  "menu.Social-App3": "Social-App3",
+  "menu.Events-App1": "Events-App1",
+  "menu.Events-App2": "Events-App2",
+  "menu.Tools.Tool-Translator-App1": "Tool-Translator-App1",
+  "menu.Tools.Tool-Translator-App2": "Tool-Translator-App2",
+  "menu.Tools.Tool-Scanner-App1": "Tool-Scanner-App1",
+  "menu.Tools.Tool-VPN Proxy-App1": "Tool-VPN Proxy-App1",
+  "menu.Tools.Tool-VPN Proxy-App2": "Tool-VPN Proxy-App2"
 };
