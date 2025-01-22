@@ -133,11 +133,10 @@ const Welcome: React.FC = () => {
             title="What We Do"
             desc={
               <Text>
-                Our mission is to democratize app privacy assessments by empowering users to share
-                their perspectives on how apps handle personal data. Through this collaborative
-                approach, we aim to bridge the gap between user expectations and privacy practices.
-                By creating a platform that values diverse voices, we strive to set a new standard
-                for accountability and user-centric privacy in the app ecosystem.
+                We aim to improve app privacy by empowering users to share their perspectives on how
+                apps handle personal data. Through collaboration, we bridge the gap between user
+                expectations and privacy practices, creating a platform that values accountability
+                and user-centric privacy.
               </Text>
             }
           />
@@ -146,16 +145,13 @@ const Welcome: React.FC = () => {
             title="What You’ll Do"
             desc={
               <>
-                {/* <Paragraph>As a participant, your role is simple but impactful:</Paragraph> */}
+                <Paragraph>As a participant, your role is simple but impactful:</Paragraph>
                 <Paragraph>
-                  1. <Text strong>Review Scenarios:</Text> You’ll be presented with scenarios of an
-                  app's sensitive data access behavior, as well as information about the app's
-                  functionalities and purposes.
+                  1. <Text strong>Review Scenarios:</Text> Examine scenarios showing app data access
+                  behaviors and functionalities.
                   <br></br>
-                  2. <Text strong>Answer Questions:</Text> For each scenario, you’ll respond to
-                  assess your comfort level with the perceived necessity of data access. We use a
-                  Likert-scale ratings and open-ended fields to capture your opinions
-                  comprehensively.
+                  2. <Text strong>Answer Questions:</Text> Rate your comfort level with data
+                  practices using a 5 Likert-scale to show your opinions.
                 </Paragraph>
               </>
             }
@@ -168,18 +164,9 @@ const Welcome: React.FC = () => {
                 <Paragraph>Your feedback has a tangible impact:</Paragraph>
                 <Paragraph>
                   <ul style={{ listStyleType: 'disc' }}>
-                    <li>
-                      For Developers: Provide developers with user-driven insights to refine their
-                      privacy practices.
-                    </li>
-                    <li>
-                      For Regulators: Offer regulators a clearer understanding of user privacy
-                      expectations.
-                    </li>
-                    <li>
-                      For Users: Empower other users with information that fosters informed
-                      decision-making about app usage.
-                    </li>
+                    <li>Helps developers refine privacy practices.</li>
+                    <li>Guides regulators in understanding user expectations.</li>
+                    <li>Empowers users to make informed decisions about app usage.</li>
                   </ul>
                 </Paragraph>
               </>
@@ -192,11 +179,11 @@ const Welcome: React.FC = () => {
 
           {/* 页面内容安排 */}
           <Paragraph>
-            Each app category is organized into a single evaluation page. Use the left navigation
-            panel to select a category. At the top of the page, you'll find a set of keywords
-            describing the features and functionalities of that app category (see the example
-            below). Each category contains several representative apps, shown as tabs (for example,
-            App 1, App 2, App 3). <br /> Each app tab provides:
+            Each app category is organized into a dedicated evaluation module, accessible through
+            the left navigation panel. At the top of each page, you’ll find a set of keywords
+            summarizing the features and functionalities of the app category (see the example
+            below). Each category includes several representative apps, displayed as tabs (e.g., App
+            1, App 2, App 3). <br /> Each app tab provides:
             <ul>
               <li>
                 A description of the app with screenshot images, outlining its main features and
@@ -237,7 +224,7 @@ const Welcome: React.FC = () => {
             <Text strong style={{ color: '#fa541c' }}>
               2. Complete the Questions:{' '}
             </Text>
-            After the survey, you will start with the <strong>Weather - App 1 Tab</strong> and
+            After the survey, you will get to the <strong>Weather - App 1 Tab</strong> and then
             proceed through each tab by clicking <strong>Next</strong> until you reach the end App
             Tab. <br />
             For each question, you’ll review a specific scenario where the app accesses certain data
