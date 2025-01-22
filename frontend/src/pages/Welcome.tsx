@@ -197,8 +197,8 @@ const Welcome: React.FC = () => {
 
           {/* 添加示例页面截图 */}
           <div style={{ textAlign: 'center', marginBottom: '16px' }}>
-            <Image
-              width="90%" // 图片宽度
+            <img
+              width="96%" // 图片宽度
               src="/images/Weather/screenshot.jpg" // 替换为实际图片路径
               alt="Example of App Category Page"
             />
