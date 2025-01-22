@@ -1,6 +1,6 @@
 import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
 import { useModel } from '@umijs/max';
-import { Card, Image, theme, Typography } from 'antd';
+import { Card, theme, Typography } from 'antd';
 import React from 'react';
 const { Title, Paragraph, Text } = Typography;
 
@@ -300,6 +300,11 @@ const Welcome: React.FC = () => {
             <a href="/Survey">Survey</a>
           </strong>{' '}
           to begin your review and share your valuable insights!
+        </Paragraph>
+        <Paragraph>
+          (If you encounter any network or service issues, please wait for a moment and try again.
+          For any questions or suggestions, don’t hesitate to reach out to us through the “Contact
+          Us” button in the bottom left corner.)
         </Paragraph>
       </div>
     </Card>
