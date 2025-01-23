@@ -29,7 +29,8 @@ class User(UserMixin, db.Model):
 
 class Survey(db.Model):
     __tablename__ = 'surveys'
-    user_name = db.Column(db.String(80), primary_key=True)
+    user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_name = db.Column(db.String(80), nullable=True)   
     # age = db.Column(db.Integer, nullable=False)
     # gender = db.Column(db.String(100), nullable=False)
     # education = db.Column(db.String(100), nullable=False)
