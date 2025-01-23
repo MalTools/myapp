@@ -1,9 +1,9 @@
 export default {
   'pages.layouts.userLayout.title': 'Your Voice, Your Privacy, Your Rating.',
-  'pages.login.accountLogin.tab': '账户密码登录',
-  'pages.login.accountLogin.errorMessage': '错误的用户名和密码(admin/ant.design)',
-  'pages.login.failure': '登录失败，请重试！',
-  'pages.login.success': '登录成功！',
+  'pages.login.accountLogin.tab': 'Account Login',
+  'pages.login.accountLogin.errorMessage': 'Incorrect username/password(admin/ant.design)',
+  'pages.login.failure': 'Login failed, please try another Username!',
+  'pages.login.success': 'Login successful!',
   'pages.login.username.placeholder': 'Your Username',
   'pages.login.username.required': 'Please input your username!',
   'pages.login.password.placeholder': 'Your Password',

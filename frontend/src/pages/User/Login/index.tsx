@@ -129,7 +129,7 @@ const Login: React.FC = () => {
         await fetchUserInfo(); // 确保 fetchUserInfo 成功执行
       } catch (fetchError) {
         console.error('获取用户信息失败:', fetchError);
-        message.error('获取用户信息失败，请稍后再试');
+        message.error('There is something wrong, Please try again later');
         return;
       }
 
@@ -283,7 +283,7 @@ const Login: React.FC = () => {
           </div>
         </LoginForm>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
