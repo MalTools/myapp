@@ -59,8 +59,8 @@ const QuestionItemAttention: React.FC<QuestionItemAttentionProps> = ({
       >
         <Radio value={1}>Social</Radio>
         <Radio value={2}>Weather</Radio>
-        <Radio value={3}>Shopping</Radio>
-        <Radio value={4}>Business</Radio>
+        <Radio value={3}>Tools</Radio>
+        <Radio value={4}>Events</Radio>
       </Radio.Group>
 
     </List.Item>
