@@ -34,7 +34,7 @@ def unauthorized():
             "isLogin": False
         },
         "errorCode": "401",
-        "errorMessage": "请先登录！",
+        "errorMessage": "Please log in！",
         "success": False
     }), 401
 
@@ -148,6 +148,7 @@ def submit_survey():
         prolific_id = data.get('prolific')
         daily_time_spent = data.get('appUsage')
         frequently_use_type = ",".join(data.get('appType'))
+        print('len(frequently_use_type) =',len(frequently_use_type))
         sensitive_type = ",".join(data.get('sensitiveData'))
         sensitive_type_other = data.get('sensitiveDataOther')
         read_policy = data.get('privacyPolicy')
