@@ -1,14 +1,12 @@
-import { Footer, Question, SelectLang, AvatarDropdown, AvatarName } from '@/components';
+import { AvatarDropdown, AvatarName } from '@/components';
+import { currentUser as queryCurrentUser } from '@/services/ant-design-pro/api';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import type { Settings as LayoutSettings } from '@ant-design/pro-components';
-import { SettingDrawer } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from '@umijs/max';
-import { history, Link } from '@umijs/max';
+import { getLocale, history, Link, setLocale } from '@umijs/max';
 import defaultSettings from '../config/defaultSettings';
-import { errorConfig } from './requestErrorConfig';
-import { currentUser as queryCurrentUser } from '@/services/ant-design-pro/api';
-import React from 'react';
 import ScrollToTop from './components/ScrollToTop';
+import { errorConfig } from './requestErrorConfig';
 // import ContactForm from './components/ContactForm';
 // const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -22,6 +20,10 @@ export async function getInitialState(): Promise<{
   loading?: boolean;
   fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
 }> {
+  // 强制设置语言为英文
+  if (getLocale() !== 'en-US') {
+    setLocale('en-US', false); // 第二个参数为 false，避免刷新页面
+  }
   const fetchUserInfo = async () => {
     try {
       const msg = await queryCurrentUser({
@@ -52,7 +54,7 @@ export async function getInitialState(): Promise<{
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
   return {
-    // actionsRender: () => [<SelectLang key="SelectLang" />],  //<Question key="doc" />, 
+    // actionsRender: () => [<SelectLang key="SelectLang" />],  //<Question key="doc" />,
     avatarProps: {
       src: initialState?.currentUser?.avatar,
       title: <AvatarName />,
@@ -92,12 +94,11 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
       },
     ],
     links: [
-          <Link key="openapi" to="/contact" target="_blank">
-            <QuestionCircleOutlined />
-            <span>Contact Us</span>
-          </Link>,
-        ]
-      ,
+      <Link key="openapi" to="/contact" target="_blank">
+        <QuestionCircleOutlined />
+        <span>Contact Us</span>
+      </Link>,
+    ],
     menuHeaderRender: undefined,
     // 自定义 403 页面
     // unAccessible: <div>unAccessible</div>,
@@ -106,7 +107,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
       // if (initialState?.loading) return <PageLoading />;
       return (
         <>
-        <ScrollToTop />
+          <ScrollToTop />
           {children}
           {/* {isDev && (
             <SettingDrawer
@@ -121,7 +122,6 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
               }}
             />
           )} */}
-
         </>
       );
     },
@@ -137,4 +137,3 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
 export const request = {
   ...errorConfig,
 };
-

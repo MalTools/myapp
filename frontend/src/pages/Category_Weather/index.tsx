@@ -3,8 +3,8 @@ import CategoryKeywords from '@/components/CategoryKeywords';
 import { PageContainer } from '@ant-design/pro-components';
 import { useIntl } from '@umijs/max';
 import { Typography } from 'antd';
-import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import App1 from './components/App1';
 import App2 from './components/App2';
 import App3 from './components/App3';
@@ -33,7 +33,6 @@ const Weather: React.FC = () => {
     navigate(keyToPath[key]); // Navigate to the corresponding path
   };
 
-
   // const [activeTabKey, setActiveTabKey] = useState('1'); // 当前激活的 Tab key
 
   const weatherKeywords = [
@@ -49,9 +48,8 @@ const Weather: React.FC = () => {
     'tide information',
     'weather widget',
     'daily weather',
-    'storms alerts'
+    'storms alerts',
   ];
-
 
   const renderTabContent = () => {
     switch (activeTabKey) {
