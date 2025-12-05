@@ -205,28 +205,13 @@ const Welcome: React.FC = () => {
           </div>
 
           <Title level={4}>YOUR TASK is:</Title>
-          <Paragraph>
-            <Text strong style={{ color: '#fa541c' }}>
-              1. Start with the Survey Section:
-            </Text>{' '}
-            Begin by navigating to the{' '}
-            <strong>
-              <a href="/Survey">Survey</a>
-            </strong>{' '}
-            section in the left navigation panel. This survey gathers additional insights into your
-            preferences, behaviors, and attitudes related to mobile app privacy and data sharing.
-            After completing the survey, click the bottom "
-            <strong>Submit this survey and Start the follow-up privacy evaluations</strong>" button
-            to proceed to various app categories for privacy evaluation.
-          </Paragraph>
 
           <Paragraph>
             <Text strong style={{ color: '#fa541c' }}>
-              2. Complete the Questions:{' '}
+              1. Complete the Questions:{' '}
             </Text>
-            After the survey, you will get to the <strong>Weather - App 1 Tab</strong> and then
-            proceed through each tab by clicking <strong>Next</strong> until you reach the end App
-            Tab. <br />
+            You will first get to the <strong>Weather - App 1 Tab</strong> and then proceed through
+            each tab by clicking <strong>Next</strong> until you reach the end App Tab. <br />
             For each question, you’ll review a specific scenario where the app accesses certain data
             (e.g., location or microphone) for a stated purpose. Use the following scale to rate
             your comfort level:
@@ -263,6 +248,21 @@ const Welcome: React.FC = () => {
             Once you have completed all the questions, a pop-up will confirm that you’ve finished
             the evaluation.{' '}
             <strong>Please read the pop-up carefully to copy and paste the Completion Code!</strong>
+          </Paragraph>
+
+          <Paragraph>
+            <Text strong style={{ color: '#fa541c' }}>
+              2. Complete the Survey Section:
+            </Text>{' '}
+            Navigate to the{' '}
+            <strong>
+              <a href="/Survey">Survey</a>
+            </strong>{' '}
+            section in the left navigation panel. This survey gathers additional insights into your
+            preferences, behaviors, and attitudes related to mobile app privacy and data sharing.
+            After completing the survey, click the bottom "
+            <strong>Submit this survey and Start the follow-up privacy evaluations</strong>" button
+            to proceed to various app categories for privacy evaluation.
           </Paragraph>
 
           {/* 鼓励用户参与 */}
