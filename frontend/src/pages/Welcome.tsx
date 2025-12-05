@@ -297,7 +297,7 @@ const Welcome: React.FC = () => {
         >
           Click on{' '}
           <strong>
-            <a href="/Survey">Survey</a>
+            <a href="/categories/weather">Weather</a>
           </strong>{' '}
           to begin your review and share your valuable insights!
         </Paragraph>
