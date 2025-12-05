@@ -343,7 +343,7 @@ const PrivacyRiskSurvey = () => {
           {/* Submit Button */}
           <Form.Item>
             <Button type="primary" htmlType="submit" onClick={submitSurvey}>
-              Submit this survey and Start the follow-up privacy evaluations
+              Submit this survey
             </Button>
           </Form.Item>
         </Form>

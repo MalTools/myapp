@@ -261,8 +261,7 @@ const Welcome: React.FC = () => {
             section in the left navigation panel. This survey gathers additional insights into your
             preferences, behaviors, and attitudes related to mobile app privacy and data sharing.
             After completing the survey, click the bottom "
-            <strong>Submit this survey and Start the follow-up privacy evaluations</strong>" button
-            to proceed to various app categories for privacy evaluation.
+            <strong>Submit this survey</strong>" button to finish the task.
           </Paragraph>
 
           {/* 鼓励用户参与 */}
